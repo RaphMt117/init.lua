@@ -18,17 +18,32 @@ lsp.setup_nvim_cmp({
 lsp.set_preferences({
     suggest_lsp_servers = false,
     sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
+        error = '',
+        warn = '',
+        hint = '',
+        info = ''
     }
 })
 
 
-lsp.setup()
-
 vim.diagnostic.config({
-    virtual_text = true
+    virtual_text = true;
 })
 
+require('mason').setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
+})
+require('mason-lspconfig').setup({
+  ensure_installed = {},
+  handlers = {
+    lsp.default_setup,
+  },
+})
+
+lsp.setup({})

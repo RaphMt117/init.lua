@@ -4,6 +4,8 @@ vim.g.mapleader = " "
 -- toggle file exporer
 vim.keymap.set("n", "<leader>1", "<cmd>Neotree toggle<CR>")
 
+
+
 -- tabs 
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>") -- open new tab 
 vim.keymap.set("n", "<C-w>", ":tabclose<CR>") -- close current tab
