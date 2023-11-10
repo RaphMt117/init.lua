@@ -17,11 +17,7 @@ return require("packer").startup(function(use)
 	use({
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
+		opts = {},
 	})
 
 	-- comments
@@ -35,6 +31,9 @@ return require("packer").startup(function(use)
 	-- surrounds
 	use({ "echasnovski/mini.nvim", branch = "stable" })
 
+	-- neodev
+	use({ "folke/neodev.nvim", opts = {} })
+
 	-- startup
 	use({
 		"startup-nvim/startup.nvim",
@@ -47,17 +46,6 @@ return require("packer").startup(function(use)
 	-- theme
 	use({ "catppuccin/nvim", as = "catppuccin" })
 
-	-- file tree
-	use({
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-		},
-	})
-
 	-- treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -69,15 +57,16 @@ return require("packer").startup(function(use)
 
 	-- formatter
 	use("stevearc/conform.nvim")
-
 	-- harpoon
 	use("theprimeagen/harpoon")
 	-- refactoring
 	use("theprimeagen/refactoring.nvim")
 	-- vim fugitive
 	use("tpope/vim-fugitive")
-	-- undo tree
-	use("mbbill/undotree")
+	-- git signs
+	use("lewis6991/gitsigns.nvim")
+	-- blank line
+	use("lukas-reineke/indent-blankline.nvim")
 
 	-- lualine
 	use({
@@ -114,6 +103,7 @@ return require("packer").startup(function(use)
 			-- Snippets
 			{ "L3MON4D3/LuaSnip" },
 			{ "rafamadriz/friendly-snippets" },
+			{ "j-hui/fidget.nvim", opts = {} },
 		},
 	})
 end)

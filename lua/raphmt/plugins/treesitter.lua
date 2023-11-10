@@ -1,6 +1,20 @@
-require'nvim-treesitter.configs'.setup {
+require("nvim-treesitter.configs").setup({
 
-	ensure_installed = { "javascript","typescript", "go","html","css","bash","markdown","markdown_inline","lua","sql","regex","json"},
+	ensure_installed = {
+		"javascript",
+		"typescript",
+		"go",
+		"html",
+		"css",
+		"bash",
+		"markdown",
+		"markdown_inline",
+		"lua",
+		"sql",
+		"regex",
+		"json",
+		"vimdoc",
+	},
 
 	sync_install = false,
 	auto_install = true,
@@ -10,4 +24,6 @@ require'nvim-treesitter.configs'.setup {
 		enable = true,
 		additional_vim_regex_highlighting = false,
 	},
-}
+})
+
+require("ibl").setup()

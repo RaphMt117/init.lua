@@ -1,49 +1,55 @@
+-- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+require("neodev").setup({
+	-- add any options here, or leave empty to use the default settings
+})
+
+-- then setup your lsp server as usual
 local lsp = require("lsp-zero")
+
 
 lsp.preset("recommended")
 
-local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp = require("cmp")
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
-  ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  ["<C-Space>"] = cmp.mapping.complete(),
+	["<S-Tab>"] = cmp.mapping.select_prev_item(cmp_select),
+	["<Tab>"] = cmp.mapping.select_next_item(cmp_select),
+	["<CR>"] = cmp.mapping.confirm({ select = true }),
+	["<C-Space>"] = cmp.mapping.complete(),
 })
 
 lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
+	mapping = cmp_mappings,
 })
 
 lsp.set_preferences({
-    suggest_lsp_servers = false,
-    sign_icons = {
-        error = '',
-        warn = '',
-        hint = '',
-        info = ''
-    }
+	suggest_lsp_servers = false,
+	sign_icons = {
+		error = "",
+		warn = "",
+		hint = "",
+		info = "",
+	},
 })
-
 
 vim.diagnostic.config({
-    virtual_text = true;
+	virtual_text = true,
 })
 
-require('mason').setup({
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
-    }
+require("mason").setup({
+	ui = {
+		icons = {
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
+		},
+	},
 })
-require('mason-lspconfig').setup({
-  ensure_installed = {},
-  handlers = {
-    lsp.default_setup,
-  },
+require("mason-lspconfig").setup({
+	ensure_installed = {},
+	handlers = {
+		lsp.default_setup,
+	},
 })
 
 lsp.setup({})

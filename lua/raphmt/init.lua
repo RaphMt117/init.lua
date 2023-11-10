@@ -1,7 +1,7 @@
 require("raphmt.set")
 require("raphmt.keybind")
 
--- plugins
+--  plugins
 require("raphmt.plugins.theme")
 require("raphmt.plugins.treesitter")
 require("raphmt.plugins.telescope")
@@ -12,3 +12,5 @@ require("raphmt.plugins.lsp")
 require("raphmt.plugins.conform")
 require("raphmt.plugins.comment")
 require("raphmt.plugins.surrounds")
+require("raphmt.plugins.gitsigns")
+require("raphmt.plugins.startup")

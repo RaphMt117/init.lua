@@ -1,6 +1,6 @@
 require("lualine").setup({
 	options = {
-		icons_enabled = true,
+		icons_enabled = false,
 		theme = "auto",
 		component_separators = { left = "", right = "|" },
 		section_separators = { left = "", right = "" },
@@ -24,7 +24,6 @@ require("lualine").setup({
 
 	sections = {
 		lualine_a = {
-			"fileformat",
 			"mode",
 		},
 		lualine_b = {},
