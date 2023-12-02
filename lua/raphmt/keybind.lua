@@ -10,11 +10,11 @@ keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>")
 vim.api.nvim_set_keymap("i", "<C-H>", "<C-W>", { noremap = true })
 
 -- tabs
-keymap.set("n", "<C-t>", ":tabnew<CR>") -- open new tab
-keymap.set("n", "<C-w>", ":tabclose<CR>") -- close current tab
+keymap.set("n", "<leader>tn", ":tabnew<CR>") -- open new tab
+keymap.set("n", "<leader>tq", ":tabclose<CR>") -- close current tab
 keymap.set("n", "<leader>q", ":tabclose<CR>") -- close current tab
-keymap.set("n", "<C-h>", ":tabn<CR>") -- go to next tab
-keymap.set("n", "<C-l>", ":tabp<CR>") -- go to previous tab
+keymap.set("n", "<leader>tk", ":tabn<CR>") -- go to next tab
+keymap.set("n", "<leader>tj", ":tabp<CR>") -- go to previous tab
 
 -- vim file explorer
 keymap.set("n", "<leader>pv", "<cmd>Ex<CR>")
@@ -42,7 +42,7 @@ keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("i", "<C-c>", "<Esc>")
 keymap.set("i", "jk", "<ESC>")
 
-keymap.set("n", "<leader>f", vim.lsp.buf.format)
+-- keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
@@ -57,11 +57,14 @@ keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>")
 keymap.set("n", "<leader>f.", "<cmd>Telescope current_buffer_fuzzy_find<CR>")
 keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<CR>")
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>")
+
 -- telescope undo
 keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
 -- command line
 keymap.set("n", "<C-space>", ":")
+
+-- keymap.set("n", "<C-x>", "Telescope buffers")
 
 -- close neovim
 keymap.set("n", "<leader>0", ":q!<CR>")

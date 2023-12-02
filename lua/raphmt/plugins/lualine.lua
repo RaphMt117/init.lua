@@ -48,7 +48,7 @@ require("lualine").setup({
 			},
 		},
 		lualine_x = {},
-		lualine_y = { "progress" },
+		lualine_y = { "branch", "progress" },
 		lualine_z = { "os.date('%a')" },
 	},
 	inactive_sections = {
@@ -62,7 +62,7 @@ require("lualine").setup({
 	-- top
 	tabline = {
 		lualine_a = {},
-		lualine_b = { "branch", "windows" },
+		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
