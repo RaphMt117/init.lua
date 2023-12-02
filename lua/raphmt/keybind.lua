@@ -57,7 +57,6 @@ keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>")
 keymap.set("n", "<leader>f.", "<cmd>Telescope current_buffer_fuzzy_find<CR>")
 keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<CR>")
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>")
-
 -- telescope undo
 keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
