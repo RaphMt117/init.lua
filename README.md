@@ -1,4 +1,6 @@
-# My personal Neovim Config (still a work in progress)
+# My personal Neovim Config (work in progress)
+
+
 
 
 ## Keymaps
@@ -26,21 +28,26 @@
 
 ### Telescope 
 
-| Keymap   | Action    |
-|--------------- | --------------- |
-| leader-leader   | Find Files   |
-| leader-fo   | Find last files   |
-| leader-fp   |  Find project files (git repository)    |
-| leader-fb   |  Find buffers    |
-| leader-fs   |  Find string (live grep)    |
-| leader-f.   |  Find text in current file    |
-| leader-km   |  Find keymaps    |
+| Mode | Keymap   | Action    |
+| ---- |--------------- | --------------- |
+| n    | leader-leader   | Find Files   |
+| n    | leader-fo   | Find last files   |
+| n    | leader-fp   |  Find project files (git repository)    |
+| n    | leader-fb   |  Find buffers    |
+| n    | leader-fs   |  Find string (live grep)    |
+| n    | leader-f.   |  Find text in current file    |
+| n    | leader-km   |  Find keymaps    |
 
 
 ### To-do 
 
-| Check    | Keymap    | Action    |
-|---------------- | --------------- | --------------- |
+    - Startup custom screen
+    - Toggletem terminal 
+    - Keybinds to split panes
+    - Git shortcuts inside neovim
+
+| Checkbox    | Keymap     | Action            |
+|------------ | ---------- | ----------------- |
 | &#9744;     | leader-fu  | Telescope Undo    |
 <!-- | - [ ]    | Item2.2    | Item3.2    | 
 | - [ ]    | Item2.3    | Item3.3    | 
