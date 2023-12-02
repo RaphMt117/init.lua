@@ -24,7 +24,7 @@ vim.opt.smartcase = true
 -- aparência
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
-vim.cmd.colorscheme("catppuccin-mocha")
+--vim.cmd.colorscheme("catppuccin")
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "0"
 vim.opt.scrolloff = 10

@@ -1,5 +1,6 @@
 require("raphmt.set")
 require("raphmt.keybind")
+require("raphmt.plugins")
 
 --  plugins
 require("raphmt.plugins.theme")

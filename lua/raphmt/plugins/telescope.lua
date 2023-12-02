@@ -1,32 +1,28 @@
-local actions = require('telescope.actions')
-    local toggle_modes = function()
-        local mode = api.nvim_get_mode().mode
-        if mode == "n" then
-            cmd [[startinsert]]
-            return
-        elseif mode == "i" then
-            cmd [[stopinsert]]
-            return
-        end
-    end
-    require('telescope').setup{
-    extensions = {
-    undo = {},
-    },
-        defaults = {
-            --horizontal vertical flex center
-            layout_strategy='horizontal',
-            mappings = {
-                i = {
-                    ["<esc>"] = actions.close,
-                    ["<c-j>"] = actions.move_selection_next,
-                    ["<c-k>"] = actions.move_selection_previous,
-                    ["<tab>"] = toggle_modes,
-                    ["<c-s>"] = actions.toggle_selection,
-                    ["<C-q>"] = actions.send_to_qflist,
-                },
-            },
-        },
-    }
+return {
+	"nvim-telescope/telescope.nvim",
+	branch = "0.1.x",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		"nvim-tree/nvim-web-devicons",
+	},
+	config = function()
+		local telescope = require("telescope")
+		local actions = require("telescope.actions")
 
-require("telescope").load_extension("undo")
+		telescope.setup({
+			defaults = {
+				path_display = { "truncate " },
+				mappings = {
+					i = {
+						["<C-k>"] = actions.move_selection_previous, -- move to prev result
+						["<C-j>"] = actions.move_selection_next, -- move to next result
+						["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+					},
+				},
+			},
+		})
+
+		telescope.load_extension("fzf")
+	end,
+}
