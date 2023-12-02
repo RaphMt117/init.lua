@@ -41,7 +41,7 @@
 
 | Check    | Keymap    | Action    |
 |---------------- | --------------- | --------------- |
-| []      | leader-fu  | Telescope Undo    |
-<!-- | [ ]    | Item2.2    | Item3.2    | 
-| [ ]    | Item2.3    | Item3.3    | -->
+| - [ ]      | leader-fu  | Telescope Undo    |
+<!-- | - [ ]    | Item2.2    | Item3.2    | 
+| - [ ]    | Item2.3    | Item3.3    | -->
 
