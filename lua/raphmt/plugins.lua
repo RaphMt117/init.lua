@@ -35,7 +35,7 @@ local plugins = {
 					up = "<C-k>",
 					right = "<C-l>",
 					last_active = "<C-\\>",
-					next = "<C-Space>",
+					next = "<C-;>",
 				},
 			})
 		end,
@@ -51,40 +51,8 @@ local plugins = {
 			{ "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
 			{ "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
 		},
-		opts = {
-			options = {
-      -- stylua: ignore
-      close_command = function(n) require("mini.bufremove").delete(n, false) end,
-      -- stylua: ignore
-      right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
-				diagnostics = "nvim_lsp",
-				always_show_bufferline = false,
-				-- diagnostics_indicator = function(_, _, diag)
-				-- 	local icons = require("lazyvim.config").icons.diagnostics
-				-- 	local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-				-- 		.. (diag.warning and icons.Warn .. diag.warning or "")
-				-- 	return vim.trim(ret)
-				-- end,
-				offsets = {
-					{
-						filetype = "neo-tree",
-						text = "Neo-tree",
-						highlight = "Directory",
-						text_align = "left",
-					},
-				},
-			},
-		},
 		config = function(_, opts)
 			require("bufferline").setup(opts)
-			-- Fix bufferline when restoring a session
-			vim.api.nvim_create_autocmd("BufAdd", {
-				callback = function()
-					vim.schedule(function()
-						pcall(nvim_bufferline)
-					end)
-				end,
-			})
 		end,
 	},
 	-- dressing nvim
@@ -212,11 +180,6 @@ local plugins = {
 		"saadparwaiz1/cmp_luasnip",
 	},
 
-	-- cmp
-	"hrsh7th/cmp-buffer",
-	"hrsh7th/cmp-path",
-	"saadparwaiz1/cmp_luasnip",
-
 	-- ---------------- LSP -----------------------
 	{
 		"neovim/nvim-lspconfig",
@@ -311,12 +274,6 @@ local plugins = {
 				filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
 			})
 
-			-- configure python server
-			lspconfig["pyright"].setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
-			})
-
 			-- configure lua server (with special settings)
 			lspconfig["lua_ls"].setup({
 				capabilities = capabilities,
@@ -400,7 +357,7 @@ local plugins = {
 	{
 		"nvimtools/none-ls.nvim", -- configure formatters & linters
 		lazy = true,
-		-- event = { "BufReadPre", "BufNewFile" }, -- to enable uncomment this
+		event = { "BufReadPre", "BufNewFile" }, -- to enable uncomment this
 		dependencies = {
 			"jay-babu/mason-null-ls.nvim",
 		},
@@ -581,12 +538,6 @@ local plugins = {
 
 	-- "folke/neodev.nvim",
 
-	-- { "catppuccin/nvim", as = "catppuccin" },
-	{
-		"catppuccin/nvim",
-		lazy = true,
-	},
-
 	-- treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -601,7 +552,6 @@ local plugins = {
 	"theprimeagen/refactoring.nvim",
 	"tpope/vim-fugitive",
 	"lewis6991/gitsigns.nvim",
-	--"lukas-reineke/indent-blankline.nvim",
 	{
 		"nvim-lualine/lualine.nvim",
 		requires = { "nvim-tree/nvim-web-devicons", opt = true },
