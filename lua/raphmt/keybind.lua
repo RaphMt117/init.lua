@@ -19,6 +19,8 @@ keymap.set("n", "<leader>tj", ":tabp<CR>") -- go to previous tab
 -- vim file explorer
 keymap.set("n", "<leader>pv", "<cmd>Ex<CR>")
 
+keymap.set("n", "<leader>md", "<cmd>MarkdownPreviewToggle<CR>")
+
 -- drag line on visual mode
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
