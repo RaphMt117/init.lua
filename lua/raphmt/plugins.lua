@@ -23,6 +23,48 @@ vim.opt.rtp:prepend(lazypath)
 -- })
 
 local plugins = {
+
+	-- leap.nvim
+	"ggandor/leap.nvim",
+
+	-- oil nvim
+	{
+		"stevearc/oil.nvim",
+		opts = {},
+		config = function()
+			require("oil").setup({
+				columns = {
+					"size",
+					"icon",
+					-- "permissions",
+					-- "mtime",
+				},
+				keymaps = {
+					["?"] = "actions.show_help",
+					["<leader>v"] = "actions.select_split",
+					["<leader>s"] = "actions.select_vsplt",
+					["<leader>t"] = "actions.select_tab",
+					["<leader>p"] = "actions.preview",
+					["<leader>o"] = "actions.change_sort",
+					["<leader>r"] = "actions.refresh",
+					["<CR>"] = "actions.select",
+					["l"] = "actions.select",
+					["<Esc>"] = "actions.close",
+					["<C-c>"] = "actions.close",
+					["q"] = "actions.close",
+					["H"] = "actions.toggle_hidden",
+					["h"] = "actions.parent",
+					["-"] = "actions.open_cwd",
+					["."] = "actions.cd",
+				},
+				use_default_keymaps = false,
+				float = {
+					padding = 5,
+				},
+			})
+		end,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	-- markdown preview
 	{
 		"iamcco/markdown-preview.nvim",
@@ -31,6 +73,14 @@ local plugins = {
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
+	},
+	{
+		{
+			"akinsho/toggleterm.nvim",
+			version = "*",
+			opts = {--[[ things you want to change go here]]
+			},
+		},
 	},
 	-- tmux navigator
 	{
@@ -45,6 +95,11 @@ local plugins = {
 					right = "<C-l>",
 					last_active = "<C-\\>",
 					next = "<C-;>",
+				},
+				copy_sync = {
+					-- TMUX >= 3.2: all yanks (and deletes) will get redirected to system
+					-- clipboard by tmux
+					redirect_to_clipboard = true,
 				},
 			})
 		end,
@@ -341,7 +396,6 @@ local plugins = {
 					"html",
 					"cssls",
 					"tailwindcss",
-					"svelte",
 					"lua_ls",
 					"graphql",
 					"emmet_ls",
@@ -381,8 +435,6 @@ local plugins = {
 				ensure_installed = {
 					"prettier", -- prettier formatter
 					"stylua", -- lua formatter
-					"black", -- python formatter
-					"pylint", -- python linter
 					"eslint_d", -- js linter
 				},
 			})
@@ -402,13 +454,8 @@ local plugins = {
 				sources = {
 					--  to disable file types use
 					--  "formatting.prettier.with({disabled_filetypes: {}})" (see null-ls docs)
-					formatting.prettier.with({
-						extra_filetypes = { "svelte" },
-					}), -- js/ts formatter
-					formatting.stylua, -- lua formatter
+					formatting.prettier, -- js/ts formatter
 					formatting.isort,
-					formatting.black,
-					diagnostics.pylint,
 					diagnostics.eslint_d.with({ -- js/ts linter
 						condition = function(utils)
 							return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs" }) -- only enable if root has .eslintrc.js or .eslintrc.cjs
@@ -438,20 +485,23 @@ local plugins = {
 		end,
 	},
 
+	-- mini nvim - using mini surround
 	{ "echasnovski/mini.nvim", version = false },
 
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-		},
-	},
+	-- neotree
+	-- {
+	-- 	"nvim-neo-tree/neo-tree.nvim",
+	-- 	branch = "v3.x",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+	-- 	},
+	-- },
+	-- telescope
 	{
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
@@ -479,21 +529,8 @@ local plugins = {
 			telescope.load_extension("fzf")
 		end,
 	},
-	-- old telescope
-	-- {
-	-- 	"nvim-telescope/telescope.nvim",
-	-- 	tag = "0.1.4",
-	-- 	-- or                              , branch = '0.1.x',
-	-- 	dependencies = {
-	-- 		{
-	-- 			"nvim-lua/plenary.nvim",
-	-- 			"nvim-treesitter/nvim-treesitter",
-	-- 			"nvim-tree/nvim-web-devicons",
-	-- 			"debugloop/telescope-undo.nvim",
-	-- 		},
-	-- 	},
-	-- },
-	--
+
+	-- plenary
 	"nvim-lua/plenary.nvim",
 
 	-- trouble

@@ -4,21 +4,37 @@ vim.g.mapleader = " "
 local keymap = vim.keymap
 
 -- toggle file exporer
-keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>")
+keymap.set("n", "<leader>e", "<cmd>Oil<CR>")
+
+keymap.set("n", "<Leader>e", ":lua require('oil').open_float()<CR>")
+keymap.set("n", "<Leader>p", ":lua require('oil.actions').toggle_hidden()<CR>")
 
 -- C-Backspace to delete word in insert mode
 vim.api.nvim_set_keymap("i", "<C-H>", "<C-W>", { noremap = true })
 
 -- tabs
-keymap.set("n", "<leader>tn", ":tabnew<CR>") -- open new tab
-keymap.set("n", "<leader>tq", ":tabclose<CR>") -- close current tab
+-- keymap.set("n", "<leader>tn", ":tabnew<CR>") -- open new tab
+-- keymap.set("n", "<leader>tq", ":tabclose<CR>") -- close current tab
 keymap.set("n", "<leader>q", ":tabclose<CR>") -- close current tab
-keymap.set("n", "<leader>tk", ":tabn<CR>") -- go to next tab
-keymap.set("n", "<leader>tj", ":tabp<CR>") -- go to previous tab
+-- keymap.set("n", "<leader>tk", ":tabn<CR>") -- go to next tab
+-- keymap.set("n", "<leader>tj", ":tabp<CR>") -- go to previous tab
+
+-- resizing windows
+keymap.set("n", "<M-.>", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
+keymap.set("n", "<M-,>", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
+keymap.set("n", "<M-=>", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
+keymap.set("n", "<M-->", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
 
 -- vim file explorer
 keymap.set("n", "<leader>pv", "<cmd>Ex<CR>")
 
+-- opens a new tmux window
+vim.keymap.set("n", "<leader>nw", "<cmd>!tmux new-window<CR>")
+
+-- opens lazygit in a new tmux window
+vim.keymap.set("n", "<leader>lg", "<cmd>!tmux new-window -c " .. vim.fn.getcwd() .. " -- lazygit <CR><CR>")
+
+-- Markdown Preview Toggle
 keymap.set("n", "<leader>md", "<cmd>MarkdownPreviewToggle<CR>")
 
 -- drag line on visual mode
@@ -27,6 +43,12 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- put line below to the end of this line
 keymap.set("n", "J", "mzJ`z")
+
+-- Increment/decrement
+keymap.set("n", "<leader>=", "<C-a>")
+keymap.set("n", "<leader>-", "<C-x>")
+
+keymap.set("n", "x", '"_x')
 
 -- salvar
 keymap.set("n", "<leader>w", ":w<CR>")
@@ -46,7 +68,6 @@ keymap.set("i", "jk", "<ESC>")
 
 -- keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
-keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- telescope

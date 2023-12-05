@@ -20,6 +20,8 @@
   - [conform.nvim](https://github.com/stevearc/conform.nvim)
   - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
   - [nvim-autopairs](https://github.com/windwp/nvim-autopairs)
+  - [leap.nvim](https://github.com/ggandor/leap.nvim)
+  - [oil.nvim](https://github.com/stevearc/oil.nvim)
 
 - ### Installed but missing configuration
 
@@ -54,6 +56,20 @@
 | n    | C-Space    | Open vim command line                     |
 | n    | leader-0   | Close current buffer (:q!)                |
 | n    | leader-vpp | Edit the plugins file from anywhere       |
+
+### [Oil.nvim](https://github.com/stevearc/oil.nvim) (only in oil window)
+
+| Keymap    | Output                     |
+| --------- | -------------------------- |
+| ?         | Show help                  |
+| leader-v  | Open in vertical split     |
+| leader-s  | Open in horzontal split    |
+| leader-t  | Open in new tab            |
+| leader-fs | Find string (live grep)    |
+| leader-f. | Find text in current file  |
+| leader-km | Find keymaps               |
+| C-k       | Navigate up in selection   |
+| C-j       | Navigate down in selection |
 
 ### [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 
