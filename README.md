@@ -115,8 +115,7 @@
 ### To-do
 
 - [ ] Startup custom screen
-- [ ] [Toggletem terminal](https://github.com/akinsho/toggleterm.nvim)
-- [ ] Keybinds to split panes
+- [x] Keybinds to split panes
 - [ ] Git shortcuts inside neovim
 - [ ] Set up [bufferline](https://github.com/akinsho/bufferline.nvim)
 - [ ] Plugin to rename variable in the entire project

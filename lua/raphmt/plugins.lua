@@ -74,14 +74,6 @@ local plugins = {
 			vim.fn["mkdp#util#install"]()
 		end,
 	},
-	{
-		{
-			"akinsho/toggleterm.nvim",
-			version = "*",
-			opts = {--[[ things you want to change go here]]
-			},
-		},
-	},
 	-- tmux navigator
 	{
 		"alexghergh/nvim-tmux-navigation",

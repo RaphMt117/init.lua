@@ -17,7 +17,6 @@ require("raphmt.plugins.surrounds")
 require("raphmt.plugins.tabline")
 require("raphmt.plugins.telescope")
 require("raphmt.plugins.theme")
-require("raphmt.plugins.toggleterm")
 require("raphmt.plugins.treesitter")
 
 -- load neotree on launch
