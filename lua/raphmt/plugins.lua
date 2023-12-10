@@ -24,46 +24,117 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 
+	-- aerial
+	{
+		"stevearc/aerial.nvim",
+		opts = {},
+		-- Optional dependencies
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
+
+	-- smart splits
+	{ "mrjones2014/smart-splits.nvim" },
+
 	-- leap.nvim
 	"ggandor/leap.nvim",
+
+	-- vim illuminate
+	"RRethy/vim-illuminate",
 
 	-- oil nvim
 	{
 		"stevearc/oil.nvim",
-		opts = {},
-		config = function()
-			require("oil").setup({
-				columns = {
-					"size",
-					"icon",
-					-- "permissions",
-					-- "mtime",
-				},
-				keymaps = {
-					["?"] = "actions.show_help",
-					["<leader>v"] = "actions.select_split",
-					["<leader>s"] = "actions.select_vsplt",
-					["<leader>t"] = "actions.select_tab",
-					["<leader>p"] = "actions.preview",
-					["<leader>o"] = "actions.change_sort",
-					["<leader>r"] = "actions.refresh",
-					["<CR>"] = "actions.select",
-					["l"] = "actions.select",
-					["<Esc>"] = "actions.close",
-					["<C-c>"] = "actions.close",
-					["q"] = "actions.close",
-					["H"] = "actions.toggle_hidden",
-					["h"] = "actions.parent",
-					["-"] = "actions.open_cwd",
-					["."] = "actions.cd",
-				},
-				use_default_keymaps = false,
-				float = {
-					padding = 5,
-				},
+		init = function()
+			local netrw_bufname
+
+			pcall(vim.api.nvim_clear_autocmds, { group = "FileExplorer" })
+
+			vim.api.nvim_create_autocmd("VimEnter", {
+				pattern = "*",
+				once = true,
+				callback = function()
+					pcall(vim.api.nvim_clear_autocmds, { group = "FileExplorer" })
+				end,
+			})
+
+			vim.api.nvim_create_autocmd("BufEnter", {
+				group = vim.api.nvim_create_augroup("oil.nvim", { clear = true }),
+				pattern = "*",
+				callback = function()
+					vim.schedule(function()
+						if vim.bo[0].filetype == "netrw" then
+							return
+						end
+						local bufname = vim.api.nvim_buf_get_name(0)
+						if vim.fn.isdirectory(bufname) == 0 then
+							_, netrw_bufname = pcall(vim.fn.expand, "#:p:h")
+							return
+						end
+
+						-- prevents reopening of file-browser if exiting without selecting a file
+						if netrw_bufname == bufname then
+							netrw_bufname = nil
+							return
+						else
+							netrw_bufname = bufname
+						end
+
+						-- ensure no buffers remain with the directory name
+						vim.api.nvim_buf_set_option(0, "bufhidden", "wipe")
+
+						require("oil").open_float()
+					end)
+				end,
+				desc = "oil.nvim replacement for netrw",
 			})
 		end,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			keymaps = {
+				["?"] = "actions.show_help",
+				["<leader>v"] = "actions.select_split",
+				["<leader>s"] = "actions.select_vsplt",
+				["<leader>t"] = "actions.select_tab",
+				["<leader>p"] = "actions.preview",
+				["<leader>o"] = "actions.change_sort",
+				["<leader>r"] = "actions.refresh",
+				["<CR>"] = "actions.select",
+				["<C-j>"] = "actions.select",
+				["<Esc>"] = "actions.close",
+				["<C-c>"] = "actions.close",
+				["q"] = "actions.close",
+				["H"] = "actions.toggle_hidden",
+				["<C-k>"] = "actions.parent",
+				["-"] = "actions.open_cwd",
+				["."] = "actions.cd",
+			},
+			use_default_keymaps = false,
+			columns = {
+				"permissions",
+				"size",
+				"mtime",
+				"icon",
+			},
+			default_file_explorer = true,
+			view_options = {
+				show_hidden = false,
+				is_always_hidden = function(name, bufnr)
+					return vim.startswith(name, ".DS_Store")
+				end,
+			},
+			float = {
+				padding = 3,
+			},
+		},
+		config = function(_, opts)
+			require("oil").setup(opts, {})
+		end,
+		dependencies = {
+			{ "nvim-treesitter/nvim-treesitter" },
+			{ "nvim-tree/nvim-web-devicons", lazy = true },
+		},
 	},
 	-- markdown preview
 	{
@@ -107,9 +178,6 @@ local plugins = {
 			{ "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
 			{ "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
 		},
-		config = function(_, opts)
-			require("bufferline").setup(opts)
-		end,
 	},
 	-- dressing nvim
 	{
@@ -133,25 +201,31 @@ local plugins = {
 			history = true,
 			delete_check_events = "TextChanged",
 		},
-  -- stylua: ignore
-  keys = {
-    {
-      "<tab>",
-      function()
-        return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-      end,
-      expr = true, silent = true, mode = "i",
-    },
-    { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
-    { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-  },
-	},
-	-- friendly snippets
-	{
-		"rafamadriz/friendly-snippets",
-		config = function()
-			require("luasnip.loaders.from_vscode").lazy_load()
-		end,
+		keys = {
+			{
+				"<tab>",
+				function()
+					return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+				end,
+				expr = true,
+				silent = true,
+				mode = "i",
+			},
+			{
+				"<tab>",
+				function()
+					require("luasnip").jump(1)
+				end,
+				mode = "s",
+			},
+			{
+				"<s-tab>",
+				function()
+					require("luasnip").jump(-1)
+				end,
+				mode = { "i", "s" },
+			},
+		},
 	},
 
 	-- cmp
@@ -181,8 +255,8 @@ local plugins = {
 				mapping = cmp.mapping.preset.insert({
 					["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 					["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<C-b>"] = cmp.mapping.scroll_docs(-3),
-					["<C-f>"] = cmp.mapping.scroll_docs(3),
+					["<C-h>"] = cmp.mapping.scroll_docs(-3),
+					["<C-l>"] = cmp.mapping.scroll_docs(3),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -382,14 +456,12 @@ local plugins = {
 			})
 
 			mason_lspconfig.setup({
-				-- list of servers for mason to install
 				ensure_installed = {
 					"tsserver",
 					"html",
 					"cssls",
 					"tailwindcss",
 					"lua_ls",
-					"graphql",
 					"emmet_ls",
 					"prismals",
 				},
@@ -447,7 +519,6 @@ local plugins = {
 					--  to disable file types use
 					--  "formatting.prettier.with({disabled_filetypes: {}})" (see null-ls docs)
 					formatting.prettier, -- js/ts formatter
-					formatting.isort,
 					diagnostics.eslint_d.with({ -- js/ts linter
 						condition = function(utils)
 							return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs" }) -- only enable if root has .eslintrc.js or .eslintrc.cjs
@@ -482,17 +553,6 @@ local plugins = {
 
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
-	-- neotree
-	-- {
-	-- 	"nvim-neo-tree/neo-tree.nvim",
-	-- 	branch = "v3.x",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-	-- 	},
-	-- },
 	-- telescope
 	{
 		"nvim-telescope/telescope.nvim",
@@ -519,6 +579,30 @@ local plugins = {
 			})
 
 			telescope.load_extension("fzf")
+		end,
+	},
+
+	-- telescope undo
+	{
+		"debugloop/telescope-undo.nvim",
+		dependencies = {
+			{
+				"nvim-telescope/telescope.nvim",
+				dependencies = { "nvim-lua/plenary.nvim" },
+			},
+		},
+		opts = {
+			extensions = {
+				undo = {
+					side_by_side = true,
+					diff_context_lines = vim.o.scrolloff,
+					saved_only = false,
+				},
+			},
+		},
+		config = function(_, opts)
+			require("telescope").setup(opts)
+			require("telescope").load_extension("undo")
 		end,
 	},
 
@@ -579,10 +663,16 @@ local plugins = {
 	-- treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
-		run = function()
+		init = function()
 			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
 			ts_update()
 		end,
+		opts = {
+			highlight = {
+				enable = true,
+				additional_vim_regex_highlighting = false,
+			},
+		},
 	},
 
 	"stevearc/conform.nvim",
@@ -592,7 +682,7 @@ local plugins = {
 	"lewis6991/gitsigns.nvim",
 	{
 		"nvim-lualine/lualine.nvim",
-		requires = { "nvim-tree/nvim-web-devicons", opt = true },
+		dependencies = { "nvim-tree/nvim-web-devicons", opts = true },
 	},
 
 	{

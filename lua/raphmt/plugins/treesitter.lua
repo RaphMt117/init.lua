@@ -34,6 +34,7 @@ require("nvim-treesitter.configs").setup({
 		"typescript",
 		"go",
 		"html",
+		"json",
 		"css",
 		"bash",
 		"markdown",
