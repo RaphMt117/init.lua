@@ -1,13 +1,13 @@
 require("Comment").setup({
 
-	---NORMAL mode
+	-- NORMAL mode
 	toggler = {
-		-- -Line-comment
+		-- Line-comment
 		line = "gcc",
-		---Block-comment
+		-- Block-comment
 		block = "gbc",
 	},
-	--- NORMAL and VISUAL mode
+	-- NORMAL and VISUAL mode
 	opleader = {
 		-- -Line-comment
 		line = "gc",
@@ -21,6 +21,6 @@ require("Comment").setup({
 		--- line below
 		below = "gco",
 		--- end of line
-		eol = "gcA",
+		eol = "gca",
 	},
 })

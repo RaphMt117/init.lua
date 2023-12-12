@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -24,6 +25,14 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 
+	-- headlines
+	{
+		"lukas-reineke/headlines.nvim",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = true, -- or `opts = {}`
+		event = "VeryLazy",
+	},
+
 	-- aerial
 	{
 		"stevearc/aerial.nvim",
@@ -33,16 +42,17 @@ local plugins = {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-tree/nvim-web-devicons",
 		},
+		event = "VeryLazy",
 	},
 
 	-- smart splits
 	{ "mrjones2014/smart-splits.nvim" },
 
 	-- leap.nvim
-	"ggandor/leap.nvim",
+	{ "ggandor/leap.nvim", event = "VeryLazy" },
 
 	-- vim illuminate
-	"RRethy/vim-illuminate",
+	{ "RRethy/vim-illuminate", event = "VeryLazy" },
 
 	-- oil nvim
 	{
@@ -101,12 +111,12 @@ local plugins = {
 				["<leader>o"] = "actions.change_sort",
 				["<leader>r"] = "actions.refresh",
 				["<CR>"] = "actions.select",
-				["<C-j>"] = "actions.select",
+				["<C-l>"] = "actions.select",
 				["<Esc>"] = "actions.close",
 				["<C-c>"] = "actions.close",
 				["q"] = "actions.close",
 				["H"] = "actions.toggle_hidden",
-				["<C-k>"] = "actions.parent",
+				["<C-h>"] = "actions.parent",
 				["-"] = "actions.open_cwd",
 				["."] = "actions.cd",
 			},
@@ -117,9 +127,10 @@ local plugins = {
 				"mtime",
 				"icon",
 			},
-			default_file_explorer = true,
+			default_file_explorer = false,
 			view_options = {
 				show_hidden = false,
+				---@diagnostic disable-next-line: unused-local
 				is_always_hidden = function(name, bufnr)
 					return vim.startswith(name, ".DS_Store")
 				end,
@@ -128,13 +139,14 @@ local plugins = {
 				padding = 3,
 			},
 		},
-		config = function(_, opts)
-			require("oil").setup(opts, {})
-		end,
+		-- config = function(_, opts)
+		-- 	require("oil").setup(opts, {})
+		-- end,
 		dependencies = {
 			{ "nvim-treesitter/nvim-treesitter" },
 			{ "nvim-tree/nvim-web-devicons", lazy = true },
 		},
+		event = "InsertEnter",
 	},
 	-- markdown preview
 	{
@@ -144,6 +156,7 @@ local plugins = {
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
+		event = "VeryLazy",
 	},
 	-- tmux navigator
 	{
@@ -167,18 +180,7 @@ local plugins = {
 			})
 		end,
 	},
-	-- tabs
-	{
-		"akinsho/bufferline.nvim",
-		event = "VeryLazy",
-		keys = {
-			{ "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-			{ "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-			{ "<leader>bc", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
-			{ "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-			{ "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-		},
-	},
+
 	-- dressing nvim
 	{
 		"stevearc/dressing.nvim",
@@ -293,8 +295,10 @@ local plugins = {
 				sorting = defaults.sorting,
 			}
 		end,
+		---@diagnostic disable-next-line: undefined-doc-name
 		---@param opts cmp.ConfigSchema
 		config = function(_, opts)
+			---@diagnostic disable-next-line: undefined-field
 			for _, source in ipairs(opts.sources) do
 				source.group_index = source.group_index or 1
 			end
@@ -328,6 +332,7 @@ local plugins = {
 			local keymap = vim.keymap -- for conciseness
 
 			local opts = { noremap = true, silent = true }
+			---@diagnostic disable-next-line: unused-local
 			local on_attach = function(client, bufnr)
 				opts.buffer = bufnr
 
@@ -477,6 +482,7 @@ local plugins = {
 				},
 			})
 		end,
+		event = "VeryLazy",
 	},
 	-- ------------------------------------------------
 	--
@@ -549,18 +555,29 @@ local plugins = {
 	},
 
 	-- mini nvim - using mini surround
-	{ "echasnovski/mini.nvim", version = false },
+	{ "echasnovski/mini.nvim", version = false, event = "VeryLazy" },
 
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{ "catppuccin/nvim", lazy = false, name = "catppuccin", priority = 1000 },
 
 	-- telescope
 	{
 		"nvim-telescope/telescope.nvim",
+		lazy = false,
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-tree/nvim-web-devicons",
+		},
+		extensions = {
+			aerial = {
+				-- Display symbols as <root>.<parent>.<symbol>
+				show_nesting = {
+					["_"] = false, -- This key will be the default
+					json = true, -- You can set the option for specific filetypes
+					yaml = true,
+				},
+			},
 		},
 		config = function()
 			local telescope = require("telescope")
@@ -571,14 +588,31 @@ local plugins = {
 					path_display = { "truncate " },
 					mappings = {
 						i = {
+							["<S-k>"] = actions.move_selection_previous, -- move to prev result
 							["<C-k>"] = actions.move_selection_previous, -- move to prev result
+							["<S-j>"] = actions.move_selection_next, -- move to next result
 							["<C-j>"] = actions.move_selection_next, -- move to next result
+							["<S-v>"] = actions.select_vertical, -- open in vertical split
+							["<S-h>"] = actions.select_horizontal, -- open in horizontal split
+							["<S-s>"] = actions.select_horizontal, -- open in horizontal split
+							["/"] = actions.select_vertical, -- open in horizontal split
+							["<S-l>"] = actions.toggle_selection, -- select
+							["<S-Tab>"] = actions.toggle_selection, -- select
+							["<C-h>"] = "which_key", -- show keys
+						},
+						n = {
+							["<S-v>"] = actions.select_vertical, -- open in vertical split
+							["<S-h>"] = actions.select_horizontal, -- open in horizontal split
+							["<S-s>"] = actions.select_horizontal, -- open in horizontal split
+							["<S-l>"] = actions.toggle_selection, -- select
+							["<C-h>"] = "which_key", -- show keys
 						},
 					},
 				},
 			})
 
 			telescope.load_extension("fzf")
+			telescope.load_extension("aerial")
 		end,
 	},
 
@@ -604,6 +638,7 @@ local plugins = {
 			require("telescope").setup(opts)
 			require("telescope").load_extension("undo")
 		end,
+		event = "VeryLazy",
 	},
 
 	-- plenary
@@ -649,6 +684,7 @@ local plugins = {
 				desc = "Next trouble/quickfix item",
 			},
 		},
+		event = "VeryLazy",
 	},
 
 	{
@@ -656,6 +692,7 @@ local plugins = {
 		config = function()
 			require("Comment").setup()
 		end,
+		event = "VeryLazy",
 	},
 
 	-- "folke/neodev.nvim",
@@ -673,16 +710,18 @@ local plugins = {
 				additional_vim_regex_highlighting = false,
 			},
 		},
+		event = "VeryLazy",
 	},
 
-	"stevearc/conform.nvim",
-	"theprimeagen/harpoon",
-	"theprimeagen/refactoring.nvim",
-	"tpope/vim-fugitive",
-	"lewis6991/gitsigns.nvim",
+	{ "stevearc/conform.nvim", event = "VeryLazy" },
+	{ "theprimeagen/harpoon", event = "VeryLazy" },
+	{ "theprimeagen/refactoring.nvim", event = "VeryLazy" },
+	{ "tpope/vim-fugitive", event = "VeryLazy" },
+	{ "lewis6991/gitsigns.nvim", event = "VeryLazy" },
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons", opts = true },
+		event = "VeryLazy",
 	},
 
 	{
@@ -690,6 +729,7 @@ local plugins = {
 		config = function()
 			require("nvim-autopairs").setup({})
 		end,
+		event = "VeryLazy",
 	},
 }
 

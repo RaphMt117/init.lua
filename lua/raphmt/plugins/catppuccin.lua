@@ -21,8 +21,8 @@ require("catppuccin").setup({
 		loops = { "italic" },
 		functions = { "italic" },
 		keywords = { "bold" },
-		strings = {},
-		variables = {},
+		strings = { "italic" },
+		variables = { "bold" },
 		numbers = { "italic" },
 		booleans = { "italic" },
 		properties = {},
@@ -73,6 +73,7 @@ require("catppuccin").setup({
 			enabled = true,
 			lsp = true,
 		},
+		headlines = true,
 
 		-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
 	},

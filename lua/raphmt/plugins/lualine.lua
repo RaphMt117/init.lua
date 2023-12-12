@@ -1,12 +1,11 @@
 require("lualine").setup({
 	options = {
-		icons_enabled = false,
+		icons_enabled = true,
 		theme = "catppuccin",
 		component_separators = { left = "", right = "|" },
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = {
 			statusline = {},
-			winbar = {},
 		},
 		ignore_focus = {},
 		always_divide_middle = true,
@@ -14,7 +13,6 @@ require("lualine").setup({
 		refresh = {
 			statusline = 1000,
 			tabline = 1000,
-			winbar = 1000,
 		},
 	},
 
@@ -32,7 +30,7 @@ require("lualine").setup({
 				"filename",
 				file_status = true, -- Displays file status (readonly status, modified status)
 				newfile_status = false, -- Display new file status (new file means no write after created)
-				path = 4, -- 0: Just the filename
+				path = 0, -- 0: Just the filename
 				-- 1: Relative path
 				-- 2: Absolute path
 				-- 3: Absolute path, with tilde as the home directory
@@ -47,44 +45,43 @@ require("lualine").setup({
 				},
 			},
 		},
-		lualine_x = {},
-		lualine_y = { "branch", "progress" },
-		lualine_z = { "os.date('%a')" },
+		lualine_x = { "diagnostics" },
+		lualine_y = { "branch", "diff", "location" },
+		lualine_z = { "searchcount" },
 	},
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = {},
-		lualine_c = {},
-		lualine_x = {},
+		lualine_c = { { "filename", path = 0 } },
+		lualine_x = { "" },
 		lualine_y = {},
 		lualine_z = {},
 	},
 	-- top
-	tabline = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = {},
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = {},
-	},
 	winbar = {
 		lualine_a = {},
 		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
+
+		lualine_y = {},
+		lualine_z = {},
+	},
+	tabline = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = { "aerial" },
+		lualine_x = {
+			{
+				"filename",
+				path = 2, -- 2: Absolute path
+				file_status = false, -- Displays file status (readonly status, modified status)
+			},
+		},
 		lualine_y = {},
 		lualine_z = {},
 	},
 
-	inactive_winbar = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = {},
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = {},
-	},
 	extensions = {},
 })
 

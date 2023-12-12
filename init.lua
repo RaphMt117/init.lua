@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 require("raphmt")
 
 vim.api.nvim_create_autocmd("VimEnter", {
