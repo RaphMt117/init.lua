@@ -25,7 +25,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 
-	-- headlines
+	-- cool highlights for markdown files
 	{
 		"lukas-reineke/headlines.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -33,7 +33,7 @@ local plugins = {
 		event = "VeryLazy",
 	},
 
-	-- aerial
+	-- quick navigation between functions, classes, methods...
 	{
 		"stevearc/aerial.nvim",
 		opts = {},
@@ -45,16 +45,16 @@ local plugins = {
 		event = "VeryLazy",
 	},
 
-	-- smart splits
+	-- easy resize for nvim panes
 	{ "mrjones2014/smart-splits.nvim" },
 
-	-- leap.nvim
+	-- quick navigation to a visible text
 	{ "ggandor/leap.nvim", event = "VeryLazy" },
 
-	-- vim illuminate
+	-- highlight other uses of the word under the cursor
 	{ "RRethy/vim-illuminate", event = "VeryLazy" },
 
-	-- oil nvim
+	-- create, change and delete files like they are text in a buffer
 	{
 		"stevearc/oil.nvim",
 		init = function()
@@ -139,16 +139,14 @@ local plugins = {
 				padding = 3,
 			},
 		},
-		-- config = function(_, opts)
-		-- 	require("oil").setup(opts, {})
-		-- end,
 		dependencies = {
 			{ "nvim-treesitter/nvim-treesitter" },
 			{ "nvim-tree/nvim-web-devicons", lazy = true },
 		},
 		event = "InsertEnter",
 	},
-	-- markdown preview
+
+	-- markdown preview in your broser tab
 	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -158,7 +156,8 @@ local plugins = {
 		end,
 		event = "VeryLazy",
 	},
-	-- tmux navigator
+
+	-- easy navigation between neovim and tmux panes
 	{
 		"alexghergh/nvim-tmux-navigation",
 		config = function()
@@ -181,13 +180,14 @@ local plugins = {
 		end,
 	},
 
-	-- dressing nvim
+	-- better ui to nvim prompts
 	{
 		"stevearc/dressing.nvim",
 		opts = {},
 		event = "VeryLazy",
 	},
-	-- lua snippets
+
+	-- Autotriggered snippets, tabstops and other cool things
 	{
 		"L3MON4D3/LuaSnip",
 		build = (not jit.os:find("Windows"))
@@ -230,7 +230,7 @@ local plugins = {
 		},
 	},
 
-	-- cmp
+	-- autocompletion for lsp, paths, snippets and in-line preview
 	{
 		"hrsh7th/nvim-cmp",
 		version = false, -- last release is way too old
@@ -278,15 +278,6 @@ local plugins = {
 				}, {
 					{ name = "buffer" },
 				}),
-				formatting = {
-					-- format = function(_, item)
-					-- 	local icons = require("raphmt.config").icons.kinds
-					-- 	if icons[item.kind] then
-					-- 		item.kind = icons[item.kind] .. item.kind
-					-- 	end
-					-- 	return item
-					-- end,
-				},
 				experimental = {
 					ghost_text = {
 						hl_group = "CmpGhostText",
@@ -306,15 +297,7 @@ local plugins = {
 		end,
 	},
 
-	-- cmp nvim lsp
-	{
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
-		"saadparwaiz1/cmp_luasnip",
-	},
-
-	-- ---------------- LSP -----------------------
+	-- collection of lsp configs
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
@@ -325,7 +308,6 @@ local plugins = {
 		config = function()
 			-- import lspconfig plugin
 			local lspconfig = require("lspconfig")
-
 			-- import cmp-nvim-lsp plugin
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -431,9 +413,8 @@ local plugins = {
 			})
 		end,
 	},
-	-- ---------------------------------------------------------
-	--
-	-- ------------ Mason -----------------------------------
+
+	-- install and manage lsp servers, linters and formatters easily
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
@@ -484,9 +465,8 @@ local plugins = {
 		end,
 		event = "VeryLazy",
 	},
-	-- ------------------------------------------------
-	--
-	-- ------------------- none ls ---------------------
+
+	-- code actions, diagnostics and completion within LSP (null-ls, maintained by the community)
 	{
 		"nvimtools/none-ls.nvim", -- configure formatters & linters
 		lazy = true,
@@ -508,11 +488,9 @@ local plugins = {
 					"eslint_d", -- js linter
 				},
 			})
-
 			-- for conciseness
 			local formatting = null_ls.builtins.formatting -- to setup formatters
 			local diagnostics = null_ls.builtins.diagnostics -- to setup linters
-
 			-- to setup format on save
 			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
@@ -554,12 +532,13 @@ local plugins = {
 		end,
 	},
 
-	-- mini nvim - using mini surround
+	-- collection of cool features for a quick start - using mini.move and mini.surround
 	{ "echasnovski/mini.nvim", version = false, event = "VeryLazy" },
 
+	-- color scheme, with tons of integrations
 	{ "catppuccin/nvim", lazy = false, name = "catppuccin", priority = 1000 },
 
-	-- telescope
+	-- find anything
 	{
 		"nvim-telescope/telescope.nvim",
 		lazy = false,
@@ -616,7 +595,7 @@ local plugins = {
 		end,
 	},
 
-	-- telescope undo
+	-- telescope plugin for search last changes on current file
 	{
 		"debugloop/telescope-undo.nvim",
 		dependencies = {
@@ -641,10 +620,7 @@ local plugins = {
 		event = "VeryLazy",
 	},
 
-	-- plenary
-	"nvim-lua/plenary.nvim",
-
-	-- trouble
+	-- cool list of diagnostics, quickfix to help solving the trouble
 	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -687,6 +663,7 @@ local plugins = {
 		event = "VeryLazy",
 	},
 
+	-- easyly comment and uncomment lines and blocks
 	{
 		"numToStr/Comment.nvim",
 		config = function()
@@ -695,9 +672,7 @@ local plugins = {
 		event = "VeryLazy",
 	},
 
-	-- "folke/neodev.nvim",
-
-	-- treesitter
+	-- highlights based on language parsers
 	{
 		"nvim-treesitter/nvim-treesitter",
 		init = function()
@@ -713,17 +688,39 @@ local plugins = {
 		event = "VeryLazy",
 	},
 
+	-- formatter
 	{ "stevearc/conform.nvim", event = "VeryLazy" },
+
+	-- hot key to quick swap files in a list
 	{ "theprimeagen/harpoon", event = "VeryLazy" },
-	{ "theprimeagen/refactoring.nvim", event = "VeryLazy" },
+
+	-- various common refactoring operations
+	{
+		"ThePrimeagen/refactoring.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require("refactoring").setup()
+		end,
+	},
+
+	-- git commands inside neovim
 	{ "tpope/vim-fugitive", event = "VeryLazy" },
+
+	-- see in buffer what is happening with git
 	{ "lewis6991/gitsigns.nvim", event = "VeryLazy" },
+
+	-- cool status line with lots of customization
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons", opts = true },
 		event = "VeryLazy",
 	},
 
+	-- I mean {} " " ``
 	{
 		"windwp/nvim-autopairs",
 		config = function()
