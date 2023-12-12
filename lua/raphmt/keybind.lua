@@ -56,25 +56,20 @@ keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { noremap = true, silent = 
 
 -- telescope
 keymap.set("n", "<leader><leader>", "<cmd>Telescope find_files<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { noremap = true, silent = true })
-keymap.set("n", "<leader>fp", "<cmd>Telescope git_files<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>fx", "<cmd>Telescope diagnostics<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
-keymap.set("n", "<leader>fm", "<cmd>Telescope man_pages<cr>", { noremap = true, silent = true })
-keymap.set("n", "<leader>f.", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>fg", "<cmd>Telescope git_status<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>fc", "<cmd>Telescope git_commits<cr>", { noremap = true, silent = true })
--- find telescope commands
-keymap.set("n", "<leader>ff", "<cmd>Telescope builtin<CR>", { noremap = true, silent = true })
--- fund buffers
-keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { noremap = true, silent = true })
--- find functions in current file
-keymap.set("n", "<leader>fa", "<cmd>Telescope aerial<CR>", { noremap = true, silent = true })
--- telescope undo
-keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>", { noremap = true, silent = true }) -- telescope undo
+keymap.set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { noremap = true, silent = true }) -- search last files opened
+keymap.set("n", "<leader>fp", "<cmd>Telescope git_files<CR>", { noremap = true, silent = true }) -- search current git repository files
+keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { noremap = true, silent = true }) -- search help tags
+keymap.set("n", "<leader>fx", "<cmd>Telescope diagnostics<CR>", { noremap = true, silent = true }) -- search diagnostics in current file
+keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { noremap = true, silent = true }) -- search open buffers
+keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true }) -- search a string in current directory
+keymap.set("n", "<leader>fm", "<cmd>Telescope man_pages<cr>", { noremap = true, silent = true }) -- search man pages
+keymap.set("n", "<leader>f.", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true }) -- search a string in current file
+keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<CR>", { noremap = true, silent = true }) -- search your keymaps
+keymap.set("n", "<leader>fg", "<cmd>Telescope git_status<CR>", { noremap = true, silent = true }) -- git status in current repo
+keymap.set("n", "<leader>fc", "<cmd>Telescope git_commits<cr>", { noremap = true, silent = true }) -- search last commits
+keymap.set("n", "<leader>ff", "<cmd>Telescope builtin<CR>", { noremap = true, silent = true }) -- search telescope commands
+keymap.set("n", "<leader>fa", "<cmd>Telescope aerial<CR>", { noremap = true, silent = true }) -- find functions in current file using aerial
+keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>", { noremap = true, silent = true }) -- telescope undo telescope undo
 
 -- command line
 keymap.set("n", "<C-space>", ":", { noremap = true, silent = true })
