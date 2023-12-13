@@ -7,6 +7,9 @@ local keymap = vim.keymap
 -- toggle file exporer
 keymap.set("n", "<Leader>e", ":lua require('oil').open_float()<CR>", { noremap = true })
 
+-- toggle debugging
+keymap.set("n", "<Leader>db", ":lua require('dapui').toggle()<CR>", { noremap = true })
+
 -- open terminal inside nvim
 keymap.set("n", "<Leader>2", ":terminal<CR>", { noremap = true })
 

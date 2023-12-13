@@ -300,10 +300,18 @@ local plugins = {
 	-- collection of lsp configs
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
+		-- event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
 			{ "antosha417/nvim-lsp-file-operations", config = true },
+			"hrsh7th/nvim-cmp",
+			"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
+			"williamboman/mason-lspconfig.nvim",
+			"williamboman/mason.nvim",
+			-- Snipnet Engine
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip", -- luasnip completion engine
+			-- Actual Snipnes
+			"rafamadriz/friendly-snippets",
 		},
 		config = function()
 			-- import lspconfig plugin
@@ -353,7 +361,6 @@ local plugins = {
 			local capabilities = cmp_nvim_lsp.default_capabilities()
 
 			-- Change the Diagnostic symbols in the sign column (gutter)
-			-- (not in youtube nvim video)
 			local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 			for type, icon in pairs(signs) do
 				local hl = "DiagnosticSign" .. type
@@ -463,13 +470,11 @@ local plugins = {
 				},
 			})
 		end,
-		event = "VeryLazy",
 	},
 
 	-- code actions, diagnostics and completion within LSP (null-ls, maintained by the community)
 	{
 		"nvimtools/none-ls.nvim", -- configure formatters & linters
-		lazy = true,
 		event = { "BufReadPre", "BufNewFile" }, -- to enable uncomment this
 		dependencies = {
 			"jay-babu/mason-null-ls.nvim",
@@ -587,6 +592,11 @@ local plugins = {
 							["<C-h>"] = "which_key", -- show keys
 						},
 					},
+				},
+				pickers = {
+					-- find_files = {
+					-- 	theme = "ivy",
+					-- },
 				},
 			})
 

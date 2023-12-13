@@ -8,6 +8,9 @@ opt.relativenumber = true
 -- nvim autoformat
 vim.g.autoformat = true
 
+opt.encoding = "utf-8"
+opt.hidden = true
+
 -- indentation, set to 4 spaces
 opt.tabstop = 2
 opt.softtabstop = 2
@@ -33,22 +36,46 @@ opt.incsearch = true
 opt.ignorecase = true
 opt.smartcase = true
 
--- tabs
-opt.splitbelow = true -- Put new windows below current
+-- shortmess
+-- I -> don't show intro message
+-- O -> file-read message overwrites previous
+-- o -> file-read message
+-- c -> completion messages
+-- T -> truncate file messages at start
+-- t -> truncate file messages in middle
+-- l -> use internal grep
+-- i -> case insensitive search
+opt.shortmess = "IOocTtli"
+
+-- automatic reload file on buffer changed outside of vim
+opt.autoread = true
+
+-- sane splits
+opt.splitbelow = true
+opt.splitright = true
 opt.splitkeep = "screen"
-opt.splitright = true -- Put new windows right of current
+
+opt.formatoptions = vim.o.formatoptions .. "n" -- detect lists for formatting
 
 -- visuals
 opt.termguicolors = true
 opt.cursorline = true
-opt.signcolumn = "yes"
 opt.colorcolumn = "0"
+-- Always draw sign column. Prevent buffer moving when adding/deleting sign.
+opt.signcolumn = "yes"
 
 -- mode is shown in lualine
 opt.showmode = false
 
--- Show some invisible characters
+-- show some invisible characters
+-- opt.list = true
+opt.listchars = "tab: >,nbsp:¬,extends:»,precedes:«,trail:•"
+
+-- show problematic characters.
 opt.list = true
+
+-- Stabilize the cursor position when creating/deleting horizontal splits
+opt.splitkeep = "topline"
 
 -- enable mouse
 opt.mouse = "a"
