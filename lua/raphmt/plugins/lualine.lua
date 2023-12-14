@@ -46,14 +46,14 @@ require("lualine").setup({
 			},
 		},
 		lualine_x = { "diagnostics" },
-		lualine_y = { "branch", "diff", "location" },
+		lualine_y = { "branch", "diff", "progress" },
 		lualine_z = { "searchcount" },
 	},
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = {},
 		lualine_c = { { "filename", path = 0 } },
-		lualine_x = { "" },
+		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {},
 	},
@@ -79,7 +79,23 @@ require("lualine").setup({
 			},
 		},
 		lualine_y = {},
-		lualine_z = {},
+		lualine_z = {
+			-- show pomodoro in line
+
+			function()
+				local ok, pomo = pcall(require, "pomo")
+				if not ok then
+					return ""
+				end
+
+				local timer = pomo.get_first_to_finish()
+				if timer == nil then
+					return ""
+				end
+
+				return "󰄉 " .. tostring(timer)
+			end,
+		},
 	},
 
 	extensions = {},

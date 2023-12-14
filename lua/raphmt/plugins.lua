@@ -25,38 +25,126 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 
+	-- nice pomodoro inside neovim
+	{ "rcarriga/nvim-notify", lazy = false },
 	{
-		"nvim-orgmode/orgmode",
+		"epwalsh/pomo.nvim",
+		version = "*", -- Recommended, use latest release instead of latest commit
+		lazy = true,
+		cmd = { "TimerStart", "TimerRepeat" },
 		dependencies = {
-			{ "nvim-treesitter/nvim-treesitter", lazy = true },
+			"rcarriga/nvim-notify",
 		},
-		event = "VeryLazy",
-		config = function()
-			-- Load treesitter grammar for org
-			require("orgmode").setup_ts_grammar()
+		opts = {},
+	},
 
-			-- Setup treesitter
-			require("nvim-treesitter.configs").setup({
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = { "org" },
+	-- obsidian integration
+	{
+		"epwalsh/obsidian.nvim",
+		version = "*", -- use latest release instead of latest commit
+		lazy = true,
+		ft = "markdown",
+		event = {
+			"BufReadPre /mnt/c/Users/rafam/Main/Arquivo/notes/main/**.md",
+			"BufReadPre /mnt/c/Users/rafam/Main/Arquivo/notes/projects/**.md",
+			"BufNewFile /mnt/c/Users/rafam/Main/Arquivo/notes/main/**.md",
+			"BufNewFile /mnt/c/Users/rafam/Main/Arquivo/notes/projects/**.md",
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+			"nvim-telescope/telescope.nvim",
+			"nvim-treesitter",
+		},
+		opts = {
+
+			-- A list of vault names and paths.
+			-- Each path should be the path to the vault root. If you use the Obsidian app,
+			-- the vault root is the parent directory of the `.obsidian` folder.
+			workspaces = {
+				{
+					name = "main",
+					path = "/mnt/c/Users/rafam/Main/Arquivo/notes/main/",
 				},
-				ensure_installed = { "org" },
-			})
+				{
+					name = "projects",
+					path = "/mnt/c/Users/rafam/Main/Arquivo/notes/projects/",
+				},
+			},
+			-- Optional, for templates (see below).
+			templates = {
+				subdir = "templates",
+				date_format = "%Y-%m-%d",
+				time_format = "%H:%M",
+				-- A map for custom variables, the key should be the variable and the value a function
+				substitutions = {},
+			},
+			date_format = "%d-%m-%Y",
+		},
 
-			-- Setup orgmode
-			require("orgmode").setup({
-				org_agenda_files = "~/notes/",
-				org_default_notes_file = "~/notes/reffile.org",
-			})
+		completion = {
+			min_chars = 1,
+		},
+
+		-- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this
+		-- way then set 'mappings = {}'.
+		mappings = {
+			-- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
+			["gf"] = {
+				action = function()
+					return require("obsidian").util.gf_passthrough()
+				end,
+				opts = { noremap = false, expr = true, buffer = true },
+			},
+			-- Toggle check-boxes.
+			["<leader>m"] = {
+				action = function()
+					return require("obsidian").util.toggle_checkbox()
+				end,
+				opts = { buffer = true },
+			},
+		},
+
+		-- Optional, for templates (see below).
+		templates = {
+			subdir = "templates",
+			date_format = "%d-%m-%Y",
+			time_format = "%M:%H",
+			-- A map for custom variables, the key should be the variable and the value a function
+			substitutions = {},
+		},
+
+		-- Optional, customize the backlinks interface.
+		backlinks = {
+			height = 10,
+			wrap = true,
+		},
+
+		follow_url_func = function(url)
+			vim.fn.jobstart({ "xdg-open", url }) -- linux
 		end,
+
+		-- Optional, configure additional syntax highlighting / extmarks.
+		ui = {},
+		external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+		hl_groups = {
+			-- The options are passed directly to `vim.api.nvim_set_hl()`. See `:help nvim_set_hl`.
+			ObsidianTodo = { bold = true, fg = "#f78c6c" },
+			ObsidianDone = { bold = true, fg = "#89ddff" },
+			ObsidianRightArrow = { bold = true, fg = "#f78c6c" },
+			ObsidianTilde = { bold = true, fg = "#ff5370" },
+			ObsidianRefText = { underline = true, fg = "#c792ea" },
+			ObsidianExtLinkIcon = { fg = "#c792ea" },
+			ObsidianTag = { italic = true, fg = "#89ddff" },
+			ObsidianHighlightText = { bg = "#75662e" },
+		},
 	},
 
 	-- cool highlights for markdown files
 	{
 		"lukas-reineke/headlines.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		config = true, -- or `opts = {}`
+		opts = {},
 		event = "VeryLazy",
 	},
 
@@ -163,7 +251,7 @@ local plugins = {
 				end,
 			},
 			float = {
-				padding = 3,
+				padding = 5,
 			},
 		},
 		dependencies = {
@@ -302,7 +390,6 @@ local plugins = {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },
-					{ name = "orgmode" },
 				}, {
 					{ name = "buffer" },
 				}),

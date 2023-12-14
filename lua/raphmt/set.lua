@@ -16,7 +16,10 @@ opt.tabstop = 2
 opt.softtabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
-opt.smartindent = true
+opt.smartindent = false
+
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = 'nc'
 
 -- undo
 opt.backup = false
