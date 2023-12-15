@@ -1,11 +1,7 @@
--- set leader key to space
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+local keymap = vim.keymap -- less text
 
--- less text
-local keymap = vim.keymap
 -- toggle file exporer
-keymap.set("n", "<Leader>e", ":lua require('oil').open_float()<CR>", { noremap = true })
+keymap.set("n", "<Leader>e", ":lua require('oil').open()<CR>", { noremap = true })
 
 -- toggle debugging
 keymap.set("n", "<Leader>db", ":lua require('dapui').toggle()<CR>", { noremap = true })
@@ -23,6 +19,9 @@ keymap.set("n", "<leader>q", ":tabclose<CR>", { noremap = true }) -- close curre
 -- splits
 keymap.set("n", "<leader>v", ":vsplit<CR>", { noremap = true }) -- split vertically
 keymap.set("n", "<leader>s", ":split<CR>", { noremap = true }) -- split horizontally
+
+-- zen mode
+keymap.set("n", "<leader>zz", "<cmd>ZenMode<CR>", { noremap = true })
 
 -- opens lazygit in a new tmux window
 keymap.set(

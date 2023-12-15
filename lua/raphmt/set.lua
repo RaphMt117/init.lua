@@ -1,9 +1,10 @@
+-- define root dir based in:
 vim.g.root_spec = { { ".git", "lua" }, "lsp", "cwd" }
+
 local opt = vim.opt
 
--- set relative and current line numbers
-opt.number = true
-opt.relativenumber = true
+opt.number = true -- current line numbers
+opt.relativenumber = true -- relative line nubers
 
 -- nvim autoformat
 vim.g.autoformat = true
@@ -18,20 +19,19 @@ opt.shiftwidth = 2
 opt.expandtab = true
 opt.smartindent = false
 
-vim.opt.conceallevel = 2
-vim.opt.concealcursor = "nc"
+opt.conceallevel = 2
+opt.concealcursor = "nc"
 
 -- undo
 opt.backup = false
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 opt.undofile = true
 
--- disable line wrap
-opt.wrap = false
+opt.wrap = false -- disable line wrap
 
 -- vertical and horizontal scroll off
 opt.scrolloff = 10
-opt.sidescrolloff = 12
+opt.sidescrolloff = 14
 
 -- search settings
 opt.hlsearch = false
@@ -50,13 +50,13 @@ opt.smartcase = true
 -- i -> case insensitive search
 opt.shortmess = "IOocTtli"
 
--- automatic reload file on buffer changed outside of vim
-opt.autoread = true
+opt.autoread = true -- automatic reload file on buffer changed outside of vim
 
 -- sane splits
 opt.splitbelow = true
 opt.splitright = true
 opt.splitkeep = "screen"
+opt.splitkeep = "topline" -- Stabilize the cursor position when creating/deleting horizontal splits
 
 opt.formatoptions = vim.o.formatoptions .. "n" -- detect lists for formatting
 
@@ -64,32 +64,19 @@ opt.formatoptions = vim.o.formatoptions .. "n" -- detect lists for formatting
 opt.termguicolors = true
 opt.cursorline = true
 opt.colorcolumn = "0"
--- Always draw sign column. Prevent buffer moving when adding/deleting sign.
-opt.signcolumn = "yes"
+opt.signcolumn = "yes" -- Always draw sign column. Prevent buffer moving when adding/deleting sign.
 
--- mode is shown in lualine
-opt.showmode = false
+opt.showmode = false -- mode is shown in lualine
 
--- show some invisible characters
--- opt.list = true
-opt.listchars = "tab: >,nbsp:¬,extends:»,precedes:«,trail:•"
+-- opt.listchars = "nbsp:¬,extends:»,precedes:«,trail:•" -- show some invisible characters - removed "tab: >"
+opt.list = false -- show problematic characters.
 
--- show problematic characters.
-opt.list = true
+opt.mouse = "a" -- enable mouse
 
--- Stabilize the cursor position when creating/deleting horizontal splits
-opt.splitkeep = "topline"
+opt.pumblend = 10 -- Popup blend
 
--- enable mouse
-opt.mouse = "a"
+opt.isfname:append("@-@")
 
--- Popup blend
-opt.pumblend = 10
+opt.updatetime = 50 -- faster update time
 
--- vim.opt.isfname:append("@-@")
-
--- faster update time
-opt.updatetime = 50
-
--- fix markdown indentation
-vim.g.markdown_recommended_style = 0
+vim.g.markdown_recommended_style = 0 -- fix markdown indentation
