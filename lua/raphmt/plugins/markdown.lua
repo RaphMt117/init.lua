@@ -1,5 +1,5 @@
--- cool highlights for markdown files
 return {
+	-- cool highlights for markdown files
 	{
 		"lukas-reineke/headlines.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
