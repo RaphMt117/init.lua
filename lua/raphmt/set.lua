@@ -1,16 +1,22 @@
+local opt = vim.opt
+local g = vim.g
+
+g.mapleader = " "
+
 -- define root dir based in:
 vim.g.root_spec = { { ".git", "lua" }, "lsp", "cwd" }
 
-local opt = vim.opt
-
 opt.number = true -- current line numbers
 opt.relativenumber = true -- relative line nubers
+opt.numberwidth = 4
+opt.ruler = false
 
 -- nvim autoformat
 vim.g.autoformat = true
 
 opt.encoding = "utf-8"
 opt.hidden = true
+opt.timeoutlen = 400
 
 -- indentation, set to 4 spaces
 opt.tabstop = 2
@@ -36,8 +42,13 @@ opt.sidescrolloff = 14
 -- search settings
 opt.hlsearch = false
 opt.incsearch = true
+opt.fillchars = { eob = " " }
 opt.ignorecase = true
 opt.smartcase = true
+
+-- go to previous/next line with h,l,left arrow and right arrow
+-- when cursor reaches end/beginning of line
+opt.whichwrap:append("<>[]hl")
 
 -- shortmess
 -- I -> don't show intro message
@@ -62,6 +73,7 @@ opt.formatoptions = vim.o.formatoptions .. "n" -- detect lists for formatting
 
 -- visuals
 opt.termguicolors = true
+opt.clipboard = "unnamedplus"
 opt.cursorline = true
 opt.colorcolumn = "0"
 opt.signcolumn = "yes" -- Always draw sign column. Prevent buffer moving when adding/deleting sign.
@@ -71,12 +83,21 @@ opt.showmode = false -- mode is shown in lualine
 -- opt.listchars = "nbsp:¬,extends:»,precedes:«,trail:•" -- show some invisible characters - removed "tab: >"
 opt.list = false -- show problematic characters.
 
+-- disable some default providers
+for _, provider in ipairs({ "node", "perl", "python3", "ruby" }) do
+	vim.g["loaded_" .. provider .. "_provider"] = 0
+end
+
+-- add binaries installed by mason.nvim to path
+local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
+vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
+
 opt.mouse = "a" -- enable mouse
 
 opt.pumblend = 10 -- Popup blend
 
 opt.isfname:append("@-@")
 
-opt.updatetime = 50 -- faster update time
+opt.updatetime = 250 -- faster update time
 
-vim.g.markdown_recommended_style = 0 -- fix markdown indentation
+g.markdown_recommended_style = 0 -- fix markdown indentation
