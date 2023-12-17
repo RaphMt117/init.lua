@@ -7,6 +7,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			"BurntSushi/ripgrep",
 			"nvim-tree/nvim-web-devicons",
 		},
 		extensions = {
@@ -25,6 +26,7 @@ return {
 
 			telescope.setup({
 				defaults = {
+					-- file_ignore_patterns = { "node_modules" },
 					path_display = { "truncate " },
 					mappings = {
 						i = {
@@ -39,6 +41,8 @@ return {
 							["<S-l>"] = actions.toggle_selection, -- select
 							["<S-Tab>"] = actions.toggle_selection, -- select
 							["<C-h>"] = "which_key", -- show keys
+							["<esc>"] = actions.close,
+							["<C-d>"] = actions.delete_buffer + actions.move_to_top,
 						},
 						n = {
 							["<S-v>"] = actions.select_vertical, -- open in vertical split
@@ -50,6 +54,23 @@ return {
 					},
 				},
 				pickers = {},
+				extensions = {
+					undo = {
+						mappings = {
+							-- undo
+							["<cr>"] = require("telescope-undo.actions").yank_additions,
+							["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
+							["<C-cr>"] = require("telescope-undo.actions").restore,
+							-- alternative defaults, for users whose terminals do questionable things with modified <cr>
+							["<C-y>"] = require("telescope-undo.actions").yank_deletions,
+							["<C-r>"] = require("telescope-undo.actions").restore,
+							-- undo
+							["y"] = require("telescope-undo.actions").yank_additions,
+							["Y"] = require("telescope-undo.actions").yank_deletions,
+							["u"] = require("telescope-undo.actions").restore,
+						},
+					},
+				},
 			})
 
 			telescope.load_extension("fzf")
@@ -73,6 +94,10 @@ return {
 					side_by_side = true,
 					diff_context_lines = vim.o.scrolloff,
 					saved_only = false,
+					layout_strategy = "vertical",
+					layout_config = {
+						preview_height = 0.6,
+					},
 				},
 			},
 		},

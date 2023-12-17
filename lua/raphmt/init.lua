@@ -1,3 +1,3 @@
 require("raphmt.lazy")
 require("raphmt.set")
-require("raphmt.keybind")
+require("raphmt.mappings")
