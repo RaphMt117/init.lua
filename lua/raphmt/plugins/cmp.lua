@@ -3,8 +3,8 @@ return {
 	version = false, -- last release is way too old
 	event = "InsertEnter",
 	dependencies = {
-		-- cmp sources plugins
 		{
+			-- cmp sources plugins
 			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp",
@@ -61,13 +61,7 @@ return {
 			end,
 		},
 	},
-	-- opts = function()
-	--     return require "plugins.configs.cmp"
-	--   end,
-	--   config = function(_, opts)
-	--     require("cmp").setup(opts)
-	--   end,
-	opts = function()
+	opts = function(_, opts)
 		vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 		local cmp = require("cmp")
 		local defaults = require("cmp.config.default")()
