@@ -19,9 +19,9 @@ opt.hidden = true
 opt.timeoutlen = 400
 
 -- indentation, set to 4 spaces
-opt.tabstop = 2
-opt.softtabstop = 2
-opt.shiftwidth = 2
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
 opt.expandtab = true
 opt.smartindent = false
 
@@ -80,7 +80,7 @@ opt.signcolumn = "yes" -- Always draw sign column. Prevent buffer moving when ad
 
 opt.showmode = false -- mode is shown in lualine
 
--- opt.listchars = "nbsp:¬,extends:»,precedes:«,trail:•" -- show some invisible characters - removed "tab: >"
+opt.listchars = "nbsp:¬,extends:»,precedes:«,trail:•" -- show some invisible characters - removed "tab: >"
 opt.list = false -- show problematic characters.
 
 -- disable some default providers

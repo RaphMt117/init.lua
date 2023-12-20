@@ -1,6 +1,7 @@
 -- easyly comment and uncomment lines and blocks
 return {
 	"numToStr/Comment.nvim",
+	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	event = "VeryLazy",
 	config = function()
 		require("Comment").setup({

@@ -1,8 +1,8 @@
 -- better ui to nvim prompts
 return {
 	"stevearc/dressing.nvim",
-	opts = {},
 	event = "VeryLazy",
+	opts = {},
 	config = function()
 		require("dressing").setup({
 			input = {

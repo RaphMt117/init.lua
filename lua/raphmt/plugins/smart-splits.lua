@@ -1,7 +1,7 @@
 -- easy resize for nvim panes
 return {
 	"mrjones2014/smart-splits.nvim",
-	lazy = true,
+	event = "VeryLazy",
 	config = function()
 		require("smart-splits").setup()
 

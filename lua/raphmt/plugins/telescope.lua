@@ -2,23 +2,12 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		event = "InsertEnter",
+		event = "VeryLazy",
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"BurntSushi/ripgrep",
-			"nvim-tree/nvim-web-devicons",
-		},
-		extensions = {
-			aerial = {
-				-- Display symbols as <root>.<parent>.<symbol>
-				show_nesting = {
-					["_"] = false, -- This key will be the default
-					json = true, -- You can set the option for specific filetypes
-					yaml = true,
-				},
-			},
 		},
 		config = function()
 			local telescope = require("telescope")
@@ -37,7 +26,7 @@ return {
 							["<S-v>"] = actions.select_vertical, -- open in vertical split
 							["<S-h>"] = actions.select_horizontal, -- open in horizontal split
 							["<S-s>"] = actions.select_horizontal, -- open in horizontal split
-							["/"] = actions.select_vertical, -- open in horizontal split
+							["/"] = actions.select_vertical, -- open in vertical split
 							["<S-l>"] = actions.toggle_selection, -- select
 							["<S-Tab>"] = actions.toggle_selection, -- select
 							["<C-h>"] = "which_key", -- show keys
@@ -74,7 +63,6 @@ return {
 			})
 
 			telescope.load_extension("fzf")
-			telescope.load_extension("aerial")
 		end,
 	},
 
@@ -94,10 +82,6 @@ return {
 					side_by_side = true,
 					diff_context_lines = vim.o.scrolloff,
 					saved_only = false,
-					layout_strategy = "vertical",
-					layout_config = {
-						preview_height = 0.6,
-					},
 				},
 			},
 		},

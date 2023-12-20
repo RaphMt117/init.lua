@@ -1,4 +1,3 @@
--- I mean {} " " ``  - OK
 return {
 	"windwp/nvim-autopairs",
 	event = "VeryLazy",

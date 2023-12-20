@@ -1,6 +1,7 @@
 -- easy navigation between neovim and tmux panes
 return {
 	"alexghergh/nvim-tmux-navigation",
+	event = "VeryLazy",
 	config = function()
 		require("nvim-tmux-navigation").setup({
 			disable_when_zoomed = true, -- defaults to false
@@ -13,8 +14,7 @@ return {
 				next = "<C-;>",
 			},
 			copy_sync = {
-				-- TMUX >= 3.2: all yanks (and deletes) will get redirected to system
-				-- clipboard by tmux
+				-- TMUX >= 3.2
 				redirect_to_clipboard = true,
 			},
 		})

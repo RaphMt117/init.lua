@@ -1,6 +1,7 @@
 -- install and manage lsp servers, linters and formatters easily
 return {
 	"williamboman/mason.nvim",
+	event = "VeryLazy",
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -32,7 +33,7 @@ return {
 				"lua_ls",
 				"html",
 				"cssls",
-				"tailwindcss",
+				-- "tailwindcss",
 				"emmet_ls",
 				"prismals",
 			},

@@ -1,7 +1,11 @@
 -- create, change and delete files like they are text in a buffer
 return {
 	"stevearc/oil.nvim",
-	event = "InsertEnter",
+	lazy = false,
+	dependencies = {
+		{ "nvim-treesitter/nvim-treesitter" },
+		{ "nvim-tree/nvim-web-devicons", lazy = true },
+	},
 	init = function()
 		-- open oil as default file explorer
 		local netrw_bufname
@@ -49,42 +53,46 @@ return {
 	end,
 
 	opts = {
-		keymaps = {
-			["?"] = "actions.show_help",
-			["<C-v>"] = "actions.select_split",
-			["<C-s>"] = "actions.select_vsplt",
-			["<leader>t"] = "actions.select_tab",
-			["<leader>p"] = "actions.preview",
-			["<leader>o"] = "actions.change_sort",
-			["<leader>r"] = "actions.refresh",
-			["<CR>"] = "actions.select",
-			["<C-l>"] = "actions.select",
-			["<Esc>"] = "actions.close",
-			["<C-c>"] = "actions.close",
-			["q"] = "actions.close",
-			["H"] = "actions.toggle_hidden",
-			["<C-h>"] = "actions.parent",
-			["-"] = "actions.open_cwd",
-			["."] = "actions.cd",
-		},
-		use_default_keymaps = false,
 		columns = {
 			-- "permissions",
 			-- "size",
 			-- "mtime",
-			"icon",
+			-- "icon",
 		},
-		default_file_explorer = false,
+		keymaps = {
+			-- open
+			["<CR>"] = "actions.select",
+			["<Space>o"] = "actions.select",
+			-- split
+			["<leader>v"] = "actions.select_vsplit",
+			["<leader>h"] = "actions.select_split",
+
+			-- go back one directory
+			["<BS>"] = "actions.parent",
+			["<leader>p"] = "actions.parent",
+
+			-- close
+			["<Esc>"] = "actions.close",
+			["<C-c>"] = "actions.close",
+			["q"] = "actions.close",
+
+			-- others
+			["."] = "actions.cd", -- mark as root
+			["H"] = "actions.toggle_hidden", -- show dotflies
+			["-"] = "actions.open_cwd", -- open root
+			["<leader>s"] = "actions.change_sort",
+			["<C-p>"] = "actions.preview",
+			["<leader>r"] = "actions.refresh",
+			["?"] = "actions.show_help",
+		},
 		view_options = {
-			show_hidden = false,
+			-- This function defines what will never be shown, even when `show_hidden` is set
 			---@diagnostic disable-next-line: unused-local
 			is_always_hidden = function(name, bufnr)
-				return vim.startswith(name, ".DS_Store")
+				return vim.startswith(name, "node_modules/")
 			end,
 		},
-	},
-	dependencies = {
-		{ "nvim-treesitter/nvim-treesitter" },
-		{ "nvim-tree/nvim-web-devicons", lazy = true },
+		use_default_keymaps = false,
+		default_file_explorer = true,
 	},
 }
