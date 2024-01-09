@@ -21,8 +21,8 @@ return {
 						i = {
 							["<S-k>"] = actions.move_selection_previous, -- move to prev result
 							["<C-k>"] = actions.move_selection_previous, -- move to prev result
-							["<S-j>"] = actions.move_selection_next, -- move to next result
 							["<C-j>"] = actions.move_selection_next, -- move to next result
+							["<S-j>"] = actions.move_selection_next, -- move to next result
 							["<S-v>"] = actions.select_vertical, -- open in vertical split
 							["<S-h>"] = actions.select_horizontal, -- open in horizontal split
 							["<S-s>"] = actions.select_horizontal, -- open in horizontal split
