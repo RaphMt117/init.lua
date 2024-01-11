@@ -16,8 +16,8 @@ return {
 			term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
 			dim_inactive = {
 				enabled = true, -- dims the background color of inactive window
-				shade = "dark",
-				percentage = 0.2, -- percentage of the shade to apply to the inactive window
+				shade = "light",
+				percentage = 0.4, -- percentage of the shade to apply to the inactive window
 			},
 			no_italic = false, -- Force no italic
 			no_bold = false, -- Force no bold

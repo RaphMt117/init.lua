@@ -48,6 +48,9 @@ keymap.set(
 -- open terminal
 keymap.set("n", "<leader>t", "<cmd>!tmux split-window -l 10 <CR>", { noremap = true })
 
+-- rename
+keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
 -- Markdown Preview Toggle
 keymap.set("n", "<leader>md", "<cmd>MarkdownPreviewToggle<CR>", { noremap = true })
 
@@ -71,7 +74,7 @@ keymap.set("i", "<C-c>", "<Esc>", { noremap = true })
 keymap.set("i", "jk", "<ESC>", { noremap = true })
 
 -- vim be good
-vim.keymap.set("n", "<leader>vbg", "<cmd> VimBeGood <CR>")
+vim.keymap.set("n", "<leader>bg", "<cmd> VimBeGood <CR>")
 
 -- make sh file executable
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { noremap = true, silent = true })

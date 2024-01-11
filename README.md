@@ -22,17 +22,17 @@
   - [nvim-autopairs](https://github.com/windwp/nvim-autopairs)
   - [leap.nvim](https://github.com/ggandor/leap.nvim)
   - [oil.nvim](https://github.com/stevearc/oil.nvim)
+  - [trouble.nvim](https://github.com/folke/trouble.nvim)
 
 - ### Installed but missing configuration
 
-  - [bufferline.nvim](https://github.com/akinsho/bufferline.nvim)
   - [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
-  - [trouble.nvim](https://github.com/folke/trouble.nvim)
   - [harpoon](https://github.com/ThePrimeagen/harpoon)
   - [refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
   - [vim.fugitive](https://github.com/tpope/vim-fugitive)
 
 - ### Theme
+
   - [catppucin.nvim](https://github.com/catppuccin/nvim)
 
 ## Keymaps
