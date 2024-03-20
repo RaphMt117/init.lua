@@ -15,6 +15,7 @@ return {
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
 					"javascript",
+					"python",
 					"typescript",
 					"go",
 					"html",
@@ -28,6 +29,7 @@ return {
 					"regex",
 					"json",
 					"vimdoc",
+					"php",
 				},
 
 				sync_install = false,
