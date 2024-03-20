@@ -24,8 +24,8 @@ return {
 						},
 					}, -- Adds pretty icons to your documents
 					["core.ui"] = {},
-					["core.export"] = {},
-					["core.summary"] = { config = { strategy = "default" } },
+					-- ["core.export"] = {},
+					-- ["core.summary"] = { config = { strategy = "default" } },
 					-- ["core.neorgcmd"] = { config = {} },
 					-- ["core.presenter"] = {
 					-- 	config = {
@@ -40,7 +40,7 @@ return {
 							engine = "nvim-cmp",
 						},
 					},
-					["core.integrations.telescope"] = {},
+					-- ["core.integrations.telescope"] = {},
 					-- ["core.keybinds"] = {
 					-- 	config = {
 					-- 		hook = function(keybinds)
@@ -75,8 +75,8 @@ return {
 					-- 		end,
 					-- 	},
 					-- },
-					["core.integrations.zen_mode"] = {},
-					["core.export.markdown"] = {},
+					-- ["core.integrations.zen_mode"] = {},
+					-- ["core.export.markdown"] = {},
 				},
 			})
 		end,
