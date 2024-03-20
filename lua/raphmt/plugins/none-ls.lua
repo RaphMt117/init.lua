@@ -16,6 +16,13 @@ return {
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
 				-- "eslint_d", -- js linter
+				"phpcs", -- php linter and formatter
+				"pretty-php",
+				"black", -- python formatter
+				"pyright",
+				"pylint",
+				"mypy",
+				"ruff",
 			},
 		})
 
@@ -24,9 +31,16 @@ return {
 			root_dir = null_ls_utils.root_pattern(".null-ls-root", "Makefile", ".git", "package.json"),
 
 			sources = {
-				diagnostics.eslint,
+				-- diagnostics.eslint,
 				formatting.prettier,
+				formatting.black.with({
+					extra_args = { "--line-length=120" },
+				}),
+				diagnostics.mypy,
+				diagnostics.ruff,
 			},
+
+			-- formatting on save
 			on_attach = function(client, bufnr)
 				if client.supports_method("textDocument/formatting") then
 					vim.api.nvim_clear_autocmds({

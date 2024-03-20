@@ -7,9 +7,12 @@ return {
 
 		config = function()
 			require("conform").setup({
+				log_level = vim.log.levels.DEBUG,
 				formatters_by_ft = {
 					lua = { "stylua" },
 					markdown = { "markdown-toc" },
+					php = { "intelephense" },
+					python = { "black" },
 				},
 
 				format_on_save = function(bufnr)
@@ -28,17 +31,23 @@ return {
 						return
 					end
 					-- ...additional logic...
-					return { timeout_ms = 500, lsp_fallback = true }
+					return { timeout_ms = 500, async = false, quiet = false }
 				end,
 
 				format_after_save = function(bufnr)
 					if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 						return
 					end
+
 					-- ...additional logic...
 					return { lsp_fallback = true }
 				end,
 			})
+			-- require("conform").formatters.black = {
+			-- 	inherit = false,
+			-- 	command = "black",
+			-- 	args = { "-l", "120", "$FILENAME" },
+			-- }
 		end,
 	},
 }
