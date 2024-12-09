@@ -5,15 +5,7 @@ return {
 	opts = {
 		window = {
 			backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-			width = 130, -- width of the Zen window
 			height = 1, -- height of the Zen window
-			options = {
-				number = false, -- disable number column
-				relativenumber = false, -- disable relative numbers
-				cursorline = false, -- disable cursorline
-				foldcolumn = "0", -- disable fold column
-				list = false, -- disable whitespace characters
-			},
 		},
 		plugins = {
 			options = {
@@ -23,9 +15,34 @@ return {
 				-- statusline will be shown only if 'laststatus' == 3
 				laststatus = 0, -- turn off the statusline in zen mode
 			},
-			twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-			gitsigns = { enabled = true }, -- disables git signs
-			tmux = { enabled = true }, -- disables the tmux statusline
 		},
 	},
+	config = function()
+		vim.keymap.set("n", "<leader>zz", function()
+			require("zen-mode").setup({
+				window = {
+					width = 100,
+					options = {},
+				},
+			})
+			require("zen-mode").toggle()
+			vim.wo.wrap = false
+			vim.wo.number = true
+			vim.wo.rnu = true
+		end)
+
+		vim.keymap.set("n", "<leader>zZ", function()
+			require("zen-mode").setup({
+				window = {
+					width = 90,
+					options = {},
+				},
+			})
+			require("zen-mode").toggle()
+			vim.wo.wrap = false
+			vim.wo.number = false
+			vim.wo.rnu = false
+			vim.opt.colorcolumn = "0"
+		end)
+	end,
 }

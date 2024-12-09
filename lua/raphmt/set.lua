@@ -1,7 +1,4 @@
 local opt = vim.opt
-local g = vim.g
-
-g.mapleader = " "
 
 -- define root dir based in:
 vim.g.root_spec = { { ".git", "lua" }, "lsp", "cwd" }
@@ -75,7 +72,7 @@ opt.formatoptions = vim.o.formatoptions .. "n" -- detect lists for formatting
 opt.termguicolors = true
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
-opt.colorcolumn = "0"
+opt.colorcolumn = "95"
 opt.signcolumn = "yes" -- Always draw sign column. Prevent buffer moving when adding/deleting sign.
 
 opt.showmode = false -- mode is shown in lualine
@@ -95,9 +92,8 @@ vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. (is_windows and ";" or 
 opt.mouse = "a" -- enable mouse
 
 opt.pumblend = 10 -- Popup blend
-
 opt.isfname:append("@-@")
 
 opt.updatetime = 250 -- faster update time
 
-g.markdown_recommended_style = 0 -- fix markdown indentation
+vim.g.markdown_recommended_style = 0 -- fix markdown indentation
