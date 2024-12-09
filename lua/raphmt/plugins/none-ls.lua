@@ -8,7 +8,7 @@ return {
 		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 		local null_ls = require("null-ls")
 		local formatting = null_ls.builtins.formatting
-		local diagnostics = null_ls.builtins.diagnostics
+		-- local diagnostics = null_ls.builtins.diagnostics
 		local null_ls_utils = require("null-ls.utils")
 
 		mason_null_ls.setup({
@@ -16,13 +16,13 @@ return {
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
 				-- "eslint_d", -- js linter
-				"phpcs", -- php linter and formatter
-				"pretty-php",
-				"black", -- python formatter
-				"pyright",
-				"pylint",
-				"mypy",
-				"ruff",
+				-- "phpcs", -- php linter and formatter
+				-- "pretty-php",
+				-- "black", -- python formatter
+				-- "pyright",
+				-- "pylint",
+				-- "mypy",
+				-- "ruff",
 			},
 		})
 
@@ -33,11 +33,10 @@ return {
 			sources = {
 				-- diagnostics.eslint,
 				formatting.prettier,
-				formatting.black.with({
-					extra_args = { "--line-length=120" },
-				}),
-				diagnostics.mypy,
-				diagnostics.ruff,
+				-- formatting.black.with({
+				-- 	extra_args = { "--line-length=120" },
+				-- }),
+				-- diagnostics.mypy,
 			},
 
 			-- formatting on save

@@ -17,7 +17,7 @@ return {
 			dependencies = "rafamadriz/friendly-snippets",
 			opts = { history = true, updateevents = "TextChanged,TextChangedI" },
 			config = function()
-				luasnip = function(opts)
+				Luasnip = function(opts)
 					require("luasnip").config.set_config(opts)
 
 					-- vscode format

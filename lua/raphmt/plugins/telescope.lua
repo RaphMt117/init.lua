@@ -69,7 +69,7 @@ return {
 				},
 			})
 
-			telescope.load_extension("fzf")
+			-- telescope.load_extension("fzf")
 		end,
 	},
 
@@ -87,7 +87,8 @@ return {
 			extensions = {
 				undo = {
 					side_by_side = true,
-					diff_context_lines = vim.o.scrolloff,
+					-- diff_context_lines = vim.o.scrolloff,
+					vim_diff_opts = { ctxlen = 0 },
 					saved_only = false,
 				},
 			},

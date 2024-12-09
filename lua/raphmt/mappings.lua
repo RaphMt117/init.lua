@@ -1,4 +1,8 @@
-local keymap = vim.keymap -- less text
+-- set leader key to space
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+local keymap = vim.keymap
 
 -- toggle file exporer
 keymap.set("n", "<Leader>e", ":lua require('oil').open()<CR>", { noremap = true })
@@ -6,16 +10,6 @@ keymap.set("n", "<Leader>e", ":lua require('oil').open()<CR>", { noremap = true 
 -- debugging
 keymap.set("n", "<Leader>db", "<cmd> DapToggleBreakpoint <CR>", { noremap = true }) -- toggle breakpoint
 keymap.set("n", "<Leader>dr", "<cmd> DapContinue <CR>", { noremap = true }) -- run debugger, next line if already running
-
--- go to beginning and end of lines
-keymap.set("i", "<C-b>", "<ESC>^i", { noremap = true })
-keymap.set("i", "<C-e>", "<End>", { noremap = true })
-
--- navigate within insert mode
--- keymap.set("i", "<C-h>", "<Left>", { noremap = true, silent = true })
--- keymap.set("i", "<C-j>", "<Down>", { noremap = true })
--- keymap.set("i", "<C-k>", "<Up>", { noremap = true })
--- keymap.set("i", "<C-l>", "<Right>", { noremap = true })
 
 -- C-Backspace to delete word in insert mode
 vim.api.nvim_set_keymap("i", "<C-H>", "<C-W>", { noremap = true })
@@ -30,9 +24,6 @@ keymap.set("n", "<leader>b", "<cmd> enew <CR>", { noremap = true })
 -- splits
 keymap.set("n", "<leader>v", ":vsplit<CR>", { noremap = true }) -- split vertically
 keymap.set("n", "<leader>h", ":split<CR>", { noremap = true }) -- split horizontally
-
--- comment in insert mode
-keymap.set("i", "<C-a>", "<Esc>jk gcc i", { noremap = true }) -- split horizontally
 
 -- zen mode
 keymap.set("n", "<leader>zz", "<cmd>ZenMode<CR>", { noremap = true })
@@ -51,9 +42,6 @@ keymap.set("n", "<leader>t", "<cmd>!tmux split-window -l 10 <CR>", { noremap = t
 -- rename
 keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- Markdown Preview Toggle
-keymap.set("n", "<leader>md", "<cmd>MarkdownPreviewToggle<CR>", { noremap = true })
-
 -- put line below to the end of this line
 keymap.set("n", "J", "mzJ`z", { noremap = true })
 
@@ -64,6 +52,9 @@ keymap.set("n", "<leader>-", "<C-x>", { noremap = true })
 -- salvar
 keymap.set("n", "<leader>w", "<cmd> w <CR>", { noremap = true })
 keymap.set({ "n", "i" }, "<C-s>", "<cmd> w <CR>", { noremap = true })
+
+-- sair
+keymap.set("n", "<leader>q", "<cmd> q <CR>", { noremap = true })
 
 -- up and down centering cursor
 keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
@@ -76,8 +67,9 @@ keymap.set("i", "jk", "<ESC>", { noremap = true })
 -- vim be good
 vim.keymap.set("n", "<leader>bg", "<cmd> VimBeGood <CR>")
 
+-- TODO: make leader xx to find warnings
 -- make sh file executable
-keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { noremap = true, silent = true })
+-- keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { noremap = true, silent = true })
 
 -- telescope
 
@@ -107,18 +99,6 @@ keymap.set("n", "<leader>fv", "<cmd> Telescope aerial <CR>", { noremap = true, s
 
 -- search all telescope pickers
 keymap.set("n", "<leader>ff", "<cmd> Telescope builtin <CR>", { noremap = true, silent = true }) -- search telescope commands
-
--- refactoring
--- vim.keymap.set("x", "<leader>re", ":Refactor extract ")
--- vim.keymip.set("x", "<leader>rf", ":Refactor extract_to_file ")
--- vim.keymap.set("x", "<leader>rv", ":Refactor extract_var ")
--- vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
--- vim.keymap.set("n", "<leader>rI", ":Refactor inline_func")
--- vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
--- vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
-
--- command line
-keymap.set("n", "<C-space>", ":", { noremap = true, silent = true })
 
 -- yank and paste between tmux session
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { noremap = true, silent = true })
