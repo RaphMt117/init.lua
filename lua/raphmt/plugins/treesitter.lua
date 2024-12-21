@@ -29,7 +29,6 @@ return {
 					"regex",
 					"json",
 					"vimdoc",
-					"php",
 				},
 
 				sync_install = false,

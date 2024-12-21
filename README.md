@@ -5,14 +5,12 @@
 - ### Installed and ready to use
 
   - [nvim-tmux-navigation](https://github.com/alexghergh/nvim-tmux-navigation)
-  - [dressing.nvim](https://github.com/stevearc/dressing.nvim)
   - [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
   - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) (and others that work together)
   - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
   - [mason.nvim](https://github.com/williamboman/mason.nvim)
   - [none-ls](https://github.com/nvimtools/none-ls.nvim)
   - [mini.nvim](https://github.com/echasnovski/mini.nvim)
-  - [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
   - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
   - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
   - [Comment.nvim](https://github.com/numToStr/Comment.nvim)
@@ -20,15 +18,12 @@
   - [conform.nvim](https://github.com/stevearc/conform.nvim)
   - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
   - [nvim-autopairs](https://github.com/windwp/nvim-autopairs)
-  - [leap.nvim](https://github.com/ggandor/leap.nvim)
   - [oil.nvim](https://github.com/stevearc/oil.nvim)
   - [trouble.nvim](https://github.com/folke/trouble.nvim)
 
-- ### Installed but missing configuration
+- ### Missing configuration
 
-  - [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
   - [harpoon](https://github.com/ThePrimeagen/harpoon)
-  - [refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
   - [vim.fugitive](https://github.com/tpope/vim-fugitive)
 
 - ### Theme
