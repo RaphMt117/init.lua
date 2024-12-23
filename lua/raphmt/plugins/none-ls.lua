@@ -7,32 +7,29 @@ return {
 		local mason_null_ls = require("mason-null-ls")
 		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 		local null_ls = require("null-ls")
-		local formatting = null_ls.builtins.formatting
-		-- local diagnostics = null_ls.builtins.diagnostics
 		local null_ls_utils = require("null-ls.utils")
+		local formatting = null_ls.builtins.formatting
 
 		mason_null_ls.setup({
 			ensure_installed = {
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
-				-- "eslint_d", -- js linter
-				-- "phpcs", -- php linter and formatter
-				-- "pretty-php",
-				-- "black", -- python formatter
-				-- "pyright",
-				-- "pylint",
-				-- "mypy",
-				-- "ruff",
 			},
 		})
 
 		local opts = {
-			-- add package.json as identifier for root (for typescript monorepos)
 			root_dir = null_ls_utils.root_pattern(".null-ls-root", "Makefile", ".git", "package.json"),
 
 			sources = {
 				-- diagnostics.eslint,
-				formatting.prettier,
+				-- formatting.prettier,
+				formatting.gofumpt,
+				formatting.goimports_reviser,
+				-- reduce long lines
+				-- formatting.golines,
+				-- simpler version
+				-- formatting.goimports,
+
 				-- formatting.black.with({
 				-- 	extra_args = { "--line-length=120" },
 				-- }),
@@ -56,12 +53,6 @@ return {
 				end
 			end,
 		}
-
-		-- markdownlint
-		local nls = require("null-ls")
-		opts.sources = vim.list_extend(opts.sources or {}, {
-			nls.builtins.diagnostics.markdownlint,
-		})
 
 		return opts
 	end,

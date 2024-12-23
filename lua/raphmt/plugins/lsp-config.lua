@@ -15,16 +15,10 @@ return {
 		"rafamadriz/friendly-snippets",
 	},
 	config = function()
-		-- import lspconfig plugin
-		-- local lspconfig = require("lspconfig")
-		-- import cmp-nvim-lsp plugin
-		-- local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-		local keymap = vim.keymap -- for conciseness
-
+		local keymap = vim.keymap
 		local opts = { noremap = true, silent = true }
-		---@diagnostic disable-next-line: unused-local
-		local on_attach = function(client, bufnr)
+
+		local on_attach = function(_, bufnr)
 			opts.buffer = bufnr
 
 			-- set keybinds
@@ -67,8 +61,14 @@ return {
 
 		local servers = {
 			clangd = {},
-			gopls = {},
-			-- pyright = {},
+			gopls = {
+				filetypes = {
+					"go",
+					"gomod",
+					"gowork",
+					"gotmpl",
+				},
+			},
 			tsserver = {},
 			ts_ls = {},
 			html = {},
@@ -85,24 +85,29 @@ return {
 					"less",
 				},
 			},
+			-- lua_ls = {
+			-- 	Lua = {
+			-- 		-- diagnostics = {
+			-- 		-- 	globals = { "vim" },
+			-- 		-- },
+			-- 		workspace = { checkThirdParty = false },
+			-- 		telemetry = { enable = false },
+			-- 	},
 
-			lua_ls = {
-				Lua = {
-					-- make the language server recognize "vim" global
-					diagnostics = {
-						globals = { "vim" },
-					},
-					workspace = {
-						-- make language server aware of runtime files
-						library = {
-							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-							[vim.fn.stdpath("config") .. "/lua"] = true,
-						},
-						checkThirdParty = false,
-					},
-					telemetry = { enable = false },
-				},
-			},
+			-- lua_ls = {
+			-- 	Lua = {
+			-- 		-- make the language server recognize "vim" global
+			-- 		-- workspace = {
+			-- 		-- 	-- make language server aware of runtime files
+			-- 		-- 	library = {
+			-- 		-- 		[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+			-- 		-- 		[vim.fn.stdpath("config") .. "/lua"] = true,
+			-- 		-- 	},
+			-- 		-- 	checkThirdParty = false,
+			-- 		-- },
+			-- 		-- 	telemetry = { enable = false },
+			-- 	},
+			-- },
 		}
 
 		-- Ensure the servers above are installed
@@ -110,7 +115,6 @@ return {
 
 		-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		-- local capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 		mason_lspconfig.setup_handlers({
 			function(server_name)

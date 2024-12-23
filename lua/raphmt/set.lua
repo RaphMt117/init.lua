@@ -12,7 +12,7 @@ opt.ruler = false
 vim.g.autoformat = true
 
 opt.encoding = "utf-8"
-opt.hidden = true
+-- opt.hidden = true
 opt.timeoutlen = 400
 
 -- indentation, set to 4 spaces
@@ -30,7 +30,7 @@ opt.backup = false
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 opt.undofile = true
 
-opt.wrap = false -- disable line wrap
+opt.wrap = true -- line wrap
 
 -- vertical and horizontal scroll off
 opt.scrolloff = 10
@@ -71,11 +71,11 @@ opt.formatoptions = vim.o.formatoptions .. "n" -- detect lists for formatting
 -- visuals
 opt.termguicolors = true
 opt.clipboard = "unnamedplus"
-opt.cursorline = true
+-- opt.cursorline = true
 opt.colorcolumn = "95"
 opt.signcolumn = "yes" -- Always draw sign column. Prevent buffer moving when adding/deleting sign.
 
-opt.showmode = false -- mode is shown in lualine
+-- opt.showmode = false -- mode is shown in lualine
 
 opt.listchars = "nbsp:¬,extends:»,precedes:«,trail:•" -- show some invisible characters - removed "tab: >"
 opt.list = false -- show problematic characters.
