@@ -13,6 +13,18 @@ end
 
 local yank_group = augroup("HighlightYank", {})
 
+-- autocmd("BufEnter", {
+-- 	group = RaphMtGroup,
+-- 	callback = function()
+-- 		if vim.bo.filetype == "lua" then
+-- 			vim.cmd.colorscheme("rose-pine-moon")
+-- 			-- vim.cmd.colorscheme("tokyonight-night")
+-- 		else
+-- 			vim.cmd.colorscheme("rose-pine-moon")
+-- 		end
+-- 	end,
+-- })
+
 autocmd("TextYankPost", {
 	group = yank_group,
 	pattern = "*",

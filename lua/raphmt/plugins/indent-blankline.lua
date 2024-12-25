@@ -10,9 +10,8 @@ return {
 
 		require("ibl").setup({
 			indent = {
-				-- -- U+2502 may also be a good choice, it will be on the middle of cursor.
-				-- -- U+250A is also a good choice
 				char = "▏",
+				-- char = "│",
 			},
 			scope = {
 				show_start = false,
@@ -25,11 +24,6 @@ return {
 		})
 
 		local gid = api.nvim_create_augroup("indent_blankline", { clear = true })
-		api.nvim_create_autocmd("InsertEnter", {
-			pattern = "*",
-			group = gid,
-			command = "IBLDisable",
-		})
 
 		api.nvim_create_autocmd("InsertLeave", {
 			pattern = "*",

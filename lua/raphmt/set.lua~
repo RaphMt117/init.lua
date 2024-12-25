@@ -3,9 +3,7 @@ local opt = vim.opt
 -- define root dir based in:
 vim.g.root_spec = { { ".git", "lua" }, "lsp", "cwd" }
 
-vim.cmd("colorscheme carbonfox")
-
--- opt.guicursor = ""
+opt.guicursor = ""
 
 opt.number = true -- current line numbers
 opt.relativenumber = true -- relative line nubers
@@ -37,7 +35,7 @@ opt.undofile = true
 opt.wrap = true -- line wrap
 
 -- vertical and horizontal scroll off
-opt.scrolloff = 10
+opt.scrolloff = 8
 opt.sidescrolloff = 14
 
 -- search settings
@@ -90,11 +88,14 @@ opt.list = false -- show problematic characters.
 -- end
 
 -- add binaries installed by mason.nvim to path
-local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
-vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
+-- local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
+-- vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
 
-opt.updatetime = 50
 opt.mouse = "a"
 
 -- opt.pumblend = 10 -- Popup blend
 opt.isfname:append("@-@")
+
+opt.updatetime = 50
+
+-- vim.g.markdown_recommended_style = 0 -- fix markdown indentation

@@ -5,13 +5,11 @@ return {
 	dependencies = {
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		"hrsh7th/nvim-cmp",
-		"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
+		"hrsh7th/cmp-nvim-lsp",
 		"williamboman/mason-lspconfig.nvim",
 		"williamboman/mason.nvim",
-		-- Snipnet Engine
 		"L3MON4D3/LuaSnip",
-		"saadparwaiz1/cmp_luasnip", -- luasnip completion engine
-		-- Actual Snipnes
+		"saadparwaiz1/cmp_luasnip",
 		"rafamadriz/friendly-snippets",
 	},
 	config = function()
@@ -72,6 +70,7 @@ return {
 			tsserver = {},
 			ts_ls = {},
 			html = {},
+			astro_ls = {},
 			cssls = {},
 			emmet_ls = {
 				filetypes = {
@@ -85,29 +84,6 @@ return {
 					"less",
 				},
 			},
-			-- lua_ls = {
-			-- 	Lua = {
-			-- 		-- diagnostics = {
-			-- 		-- 	globals = { "vim" },
-			-- 		-- },
-			-- 		workspace = { checkThirdParty = false },
-			-- 		telemetry = { enable = false },
-			-- 	},
-
-			-- lua_ls = {
-			-- 	Lua = {
-			-- 		-- make the language server recognize "vim" global
-			-- 		-- workspace = {
-			-- 		-- 	-- make language server aware of runtime files
-			-- 		-- 	library = {
-			-- 		-- 		[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-			-- 		-- 		[vim.fn.stdpath("config") .. "/lua"] = true,
-			-- 		-- 	},
-			-- 		-- 	checkThirdParty = false,
-			-- 		-- },
-			-- 		-- 	telemetry = { enable = false },
-			-- 	},
-			-- },
 		}
 
 		-- Ensure the servers above are installed

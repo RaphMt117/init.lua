@@ -1,13 +1,13 @@
 -- create, change and delete files like they are text in a buffer
 return {
 	"stevearc/oil.nvim",
+	tag = "v2.10.0",
 	lazy = false,
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter" },
 		{ "nvim-tree/nvim-web-devicons", lazy = true },
 	},
 	init = function()
-		-- open oil as default file explorer
 		local netrw_bufname
 
 		pcall(vim.api.nvim_clear_autocmds, { group = "FileExplorer" })
@@ -41,9 +41,6 @@ return {
 					else
 						netrw_bufname = bufname
 					end
-
-					-- ensure no buffers remain with the directory name
-					vim.api.nvim_buf_set_option(0, "bufhidden", "wipe")
 
 					require("oil").open()
 				end)
@@ -85,12 +82,12 @@ return {
 			["<leader>r"] = "actions.refresh",
 			["?"] = "actions.show_help",
 		},
+		buf_options = {
+			buflisted = false,
+			bufhidden = "hide",
+		},
 		view_options = {
-			-- This function defines what will never be shown, even when `show_hidden` is set
-			---@diagnostic disable-next-line: unused-local
-			is_always_hidden = function(name, bufnr)
-				return vim.startswith(name, "node_modules/")
-			end,
+			show_hidden = true,
 		},
 		use_default_keymaps = false,
 		default_file_explorer = true,
