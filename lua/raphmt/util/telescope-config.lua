@@ -12,11 +12,7 @@ M.project_files = function()
 		is_inside_work_tree[cwd] = vim.v.shell_error == 0
 	end
 
-	if is_inside_work_tree[cwd] then
-		builtin.git_files(opts)
-	else
-		builtin.find_files(opts)
-	end
+	builtin.find_files(opts)
 end
 
 return M
