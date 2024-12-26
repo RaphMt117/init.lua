@@ -109,17 +109,13 @@
 
 ### To-do
 
-- [ ] Startup custom screen
 - [x] Keybinds to split panes
-- [ ] Git shortcuts inside neovim
 - [ ] Set up [bufferline](https://github.com/akinsho/bufferline.nvim)
-- [ ] Plugin to rename variable in the entire project
-- [ ] Configure language servers for [LspConfig](https://github.com/neovim/nvim-lspconfig)
-- [ ] [Neodev](https://github.com/folke/neodev.nvim) plugin
+- [x] Configure language servers for [LspConfig](https://github.com/neovim/nvim-lspconfig)
+- [x] [Neodev](https://github.com/folke/neodev.nvim) plugin
+- [ ] fix keybind to trigger autocomplete
+- [ ] fix go to definition
 
-| Checkbox | Keymap    | Output         |
-| -------- | --------- | -------------- |
-| &#9744;  | leader-fu | Telescope Undo |
 
 <!--     | - [ ]     | Item2.2        | Item3.2 |
 | - [ ]    | Item2.3   | Item3.3        |
