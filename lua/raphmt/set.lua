@@ -3,7 +3,7 @@ local opt = vim.opt
 -- define root dir based in:
 vim.g.root_spec = { { ".git", "lua" }, "lsp", "cwd" }
 
-vim.cmd("colorscheme carbonfox")
+vim.cmd("colorscheme midnight")
 
 -- opt.guicursor = ""
 
