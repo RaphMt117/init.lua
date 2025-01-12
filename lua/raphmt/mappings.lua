@@ -1,10 +1,10 @@
 local keymap = vim.keymap
 
 -- toggle oil
--- keymap.set("n", "<Leader>e", ":lua require('oil').open()<CR>", { noremap = true })
+keymap.set("n", "<Leader>e", ":lua require('oil').open()<CR>", { noremap = true })
 
 -- toggle neotree
-keymap.set("n", "<Leader>e", ":Neotree toggle <CR>", { noremap = true })
+keymap.set("n", "<Leader>2", ":Neotree toggle <CR>", { noremap = true })
 
 -- tabs
 keymap.set("n", "<leader>t", ":tabnew<CR>", { noremap = true }) -- open new tab

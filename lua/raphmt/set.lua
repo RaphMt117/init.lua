@@ -7,9 +7,12 @@ vim.cmd("colorscheme midnight")
 
 -- opt.guicursor = ""
 
+vim.g.loaded_netrw = 1 -- disable netrw
+vim.g.loaded_netrwPlugin = 1 --  disable netrwnetrw
+
 opt.number = true -- current line numbers
 opt.relativenumber = true -- relative line nubers
-opt.numberwidth = 4
+opt.numberwidth = 2
 opt.ruler = false
 
 -- nvim autoformat
@@ -22,11 +25,12 @@ opt.timeoutlen = 400
 -- indentation, set to 4 spaces
 opt.tabstop = 4
 opt.softtabstop = 4
-opt.shiftwidth = 4
 opt.expandtab = true
+opt.shiftwidth = 4
 opt.smartindent = false
 
-opt.conceallevel = 2
+-- opt.conceallevel = 2
+opt.conceallevel = 0 -- so that `` is visible in markdown files
 opt.concealcursor = "nc"
 
 -- undo
@@ -76,10 +80,13 @@ opt.formatoptions = vim.o.formatoptions .. "n" -- detect lists for formatting
 opt.termguicolors = true
 opt.colorcolumn = "95"
 opt.signcolumn = "yes" -- Always draw sign column. Prevent buffer moving when adding/deleting sign.
--- opt.clipboard = "unnamedplus"
+opt.clipboard = "unnamedplus"
+opt.showcmd = false
+opt.ruler = false
+opt.laststatus = 0 -- Always display the status line
 -- opt.cursorline = true
 
--- opt.showmode = false -- mode is shown in lualine
+opt.showmode = false -- mode is shown in lualine
 
 -- opt.listchars = "nbsp:¬,extends:»,precedes:«,trail:•" -- show some invisible characters - removed "tab: >"
 opt.list = false -- show problematic characters.
@@ -93,7 +100,7 @@ opt.list = false -- show problematic characters.
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
 vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
 
-opt.updatetime = 50
+opt.updatetime = 100
 opt.mouse = "a"
 
 -- opt.pumblend = 10 -- Popup blend
