@@ -1,10 +1,11 @@
-local api = vim.api
+local autocmd = vim.api.nvim_create_autocmd
+local command = vim.api.nvim_command
 
 -- don't auto comment new line
-api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
+autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 
 -- wrap words "softly" (no carriage return) in mail buffer
-api.nvim_create_autocmd("Filetype", {
+autocmd("Filetype", {
 	pattern = "mail",
 	callback = function()
 		vim.opt.textwidth = 0
@@ -17,7 +18,7 @@ api.nvim_create_autocmd("Filetype", {
 })
 
 -- Highlight on yank
-api.nvim_create_autocmd("TextYankPost", {
+autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank()
 	end,
@@ -25,7 +26,7 @@ api.nvim_create_autocmd("TextYankPost", {
 
 -- go to last loc when opening a buffer
 -- this mean that when you open a file, you will be at the last position
-api.nvim_create_autocmd("BufReadPost", {
+autocmd("BufReadPost", {
 	callback = function()
 		local mark = vim.api.nvim_buf_get_mark(0, '"')
 		local lcount = vim.api.nvim_buf_line_count(0)
@@ -37,19 +38,7 @@ api.nvim_create_autocmd("BufReadPost", {
 
 -- auto close brackets
 -- this
-api.nvim_create_autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
-
--- show cursor line only in active window
-local cursorGrp = api.nvim_create_augroup("CursorLine", { clear = true })
-api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
-	pattern = "*",
-	command = "set cursorline",
-	group = cursorGrp,
-})
-api.nvim_create_autocmd(
-	{ "InsertEnter", "WinLeave" },
-	{ pattern = "*", command = "set nocursorline", group = cursorGrp }
-)
+autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
 
 -- Enable spell checking for certain file types
 -- api.nvim_create_autocmd(
@@ -63,7 +52,7 @@ api.nvim_create_autocmd(
 --   }
 -- )
 
-vim.api.nvim_create_autocmd("ColorScheme", {
+autocmd("ColorScheme", {
 	callback = function()
 		-- change the background color of floating windows and borders.
 		-- vim.cmd('highlight NormalFloat guibg=none guifg=none')
@@ -98,7 +87,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- close some filetypes with <q>
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),
 	pattern = {
 		"PlenaryTestPopup",
@@ -122,10 +111,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- resize neovim split when terminal is resized
-vim.api.nvim_command("autocmd VimResized * wincmd =")
+command("autocmd VimResized * wincmd =")
 
 -- fix terraform and hcl comment string
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("FixTerraformCommentString", { clear = true }),
 	callback = function(ev)
 		vim.bo[ev.buf].commentstring = "# %s"
@@ -142,9 +131,9 @@ vim.api.nvim_create_autocmd("FileType", {
 --   end,
 --   group = goformat_sync_grp,
 -- })
---
+
 -- Run gofmt + goimport on save
-local goimport_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+local goimport_sync_grp = autocmd("GoImport", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.go",
 	callback = function()
