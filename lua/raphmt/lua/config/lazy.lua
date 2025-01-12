@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({ import = "raphmt.lua.plugins" }, {
 	install = {
 		missing = true,
-		colorscheme = { "catppuccin", "habamax" },
+		-- colorscheme = { "catppuccin", "habamax" },
 	},
 	checker = {
 		enabled = true,

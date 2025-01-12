@@ -9,7 +9,7 @@ return {
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		config = true,
+		config = false,
 		-- use opts = {} for passing setup options
 		-- this is equivalent to setup({}) function
 	},
@@ -130,17 +130,17 @@ return {
 				},
 			},
 		},
-		{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-		{ -- optional completion source for require statements and module annotations
-			"hrsh7th/nvim-cmp",
-			opts = function(_, opts)
-				opts.sources = opts.sources or {}
-				table.insert(opts.sources, {
-					name = "lazydev",
-					group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-				})
-			end,
-		},
+		-- { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+		-- { -- optional completion source for require statements and module annotations
+		-- 	"hrsh7th/nvim-cmp",
+		-- 	opts = function(_, opts)
+		-- 		opts.sources = opts.sources or {}
+		-- 		table.insert(opts.sources, {
+		-- 			name = "lazydev",
+		-- 			group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+		-- 		})
+		-- 	end,
+		-- },
 	},
 
 	-- Indent guide for Neovim
@@ -189,11 +189,6 @@ return {
 		end,
 	},
 
-	-- editor config support
-	{
-		"editorconfig/editorconfig-vim",
-	},
-
 	-- Enhanced f/t motions for Leap
 	-- {
 	-- 	"ggandor/flit.nvim",
@@ -234,6 +229,7 @@ return {
 			"SmiteshP/nvim-navic",
 			"nvim-tree/nvim-web-devicons", -- optional dependency
 		},
+		enabled = false,
 		opts = {
 			-- configurations go here
 		},
@@ -332,7 +328,12 @@ return {
 	-- },
 
 	{
-		"fladson/vim-kitty",
+		"ThePrimeagen/vim-be-good",
+		event = "VeryLazy",
+	},
+	{ "tpope/vim-fugitive", event = "VeryLazy" },
+
+	{
 		"MunifTanjim/nui.nvim",
 		"rcarriga/nvim-notify",
 	},

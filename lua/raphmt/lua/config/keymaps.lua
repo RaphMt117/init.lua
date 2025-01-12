@@ -84,8 +84,8 @@ map("n", "<Esc>", ":nohlsearch<CR>", opts)
 --------------------------------------
 
 -- tabs
-map("n", "<leader>tn", ":tabnew<CR>", { noremap = true }) -- open new tab
-map("n", "<leader>to", ":tabonly<CR>", { noremap = true }) -- next tab
+map("n", "<leader>Tn", ":tabnew<CR>", { noremap = true }) -- open new tab
+map("n", "<leader>To", ":tabonly<CR>", { noremap = true }) -- next tab
 map("n", "<S-l>", ":tabnext<CR>", { noremap = true }) -- next tab
 map("n", "<S-h>", ":tabprevious<CR>", { noremap = true }) -- next tab
 
@@ -102,28 +102,9 @@ map("i", "<C-c>", "<Esc>", { noremap = true })
 
 map("n", "<leader>bg", "<cmd> VimBeGood <CR>")
 
-map("n", "<leader>rn", vim.lsp.buf.rename)
 map("n", "<leader>a", vim.lsp.buf.code_action)
 
--- go to definition
-map("n", "gd", function()
-	vim.lsp.buf.definition()
-end)
-
--- Diagnostic keymaps
-map("n", "[x", vim.diagnostic.goto_prev)
-map("n", "]x", vim.diagnostic.goto_next)
-map("n", "<leader>i", vim.diagnostic.open_float)
-
--- yank and paste between tmux session
-map({ "n", "v" }, "<leader>y", [["+y]], { noremap = true, silent = true })
-map("n", "<leader>Y", [["+Y]], { noremap = true, silent = true })
-map("n", "<leader>p", [["+p]], { noremap = true, silent = true })
-
--- open lazy menu
-map("n", "<leader>l", "<cmd>Lazy<CR>", { noremap = true, silent = true })
-
--- close neovim, close tab, close anithing (without saving)
+-- close neovim, close tab, close anything (without saving)
 map("n", "<leader>0", ":q!<CR>", { noremap = true, silent = true })
 
 map("n", "x", '"_x', { noremap = true, silent = true })

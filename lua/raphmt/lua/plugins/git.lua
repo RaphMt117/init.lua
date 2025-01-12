@@ -6,36 +6,36 @@ return {
 			-- local icons = require('raphmt.lua.config.icons')
 			require("gitsigns").setup({
 				-- signs = {
-				  -- add = {
+				-- add = {
 
-				  --   text = icons.ui.BoldLineLeft,
-				  --   numhl = "GitSignsAddNr",
-				  --   linehl = "GitSignsAddLn",
-				  -- },
-				  -- change = {
-				  --   hl = "GitSignsChange",
-				  --   text = icons.ui.BoldLineLeft,
-				  --   numhl = "GitSignsChangeNr",
-				  --   linehl = "GitSignsChangeLn",
-				  -- },
-				  -- delete = {
-				  --   hl = "GitSignsDelete",
-				  --   text = icons.ui.TriangleShortArrowRight,
-				  --   numhl = "GitSignsDeleteNr",
-				  --   linehl = "GitSignsDeleteLn",
-				  -- },
-				  -- topdelete = {
-				  --   hl = "GitSignsDelete",
-				  --   text = icons.ui.TriangleShortArrowRight,
-				  --   numhl = "GitSignsDeleteNr",
-				  --   linehl = "GitSignsDeleteLn",
-				  -- },
-				  -- changedelete = {
-				  --   hl = "GitSignsChange",
-				  --   text = icons.ui.BoldLineLeft,
-				  --   numhl = "GitSignsChangeNr",
-				  --   linehl = "GitSignsChangeLn",
-				  -- },
+				--   text = icons.ui.BoldLineLeft,
+				--   numhl = "GitSignsAddNr",
+				--   linehl = "GitSignsAddLn",
+				-- },
+				-- change = {
+				--   hl = "GitSignsChange",
+				--   text = icons.ui.BoldLineLeft,
+				--   numhl = "GitSignsChangeNr",
+				--   linehl = "GitSignsChangeLn",
+				-- },
+				-- delete = {
+				--   hl = "GitSignsDelete",
+				--   text = icons.ui.TriangleShortArrowRight,
+				--   numhl = "GitSignsDeleteNr",
+				--   linehl = "GitSignsDeleteLn",
+				-- },
+				-- topdelete = {
+				--   hl = "GitSignsDelete",
+				--   text = icons.ui.TriangleShortArrowRight,
+				--   numhl = "GitSignsDeleteNr",
+				--   linehl = "GitSignsDeleteLn",
+				-- },
+				-- changedelete = {
+				--   hl = "GitSignsChange",
+				--   text = icons.ui.BoldLineLeft,
+				--   numhl = "GitSignsChangeNr",
+				--   linehl = "GitSignsChangeLn",
+				-- },
 				-- },
 				signcolumn = true,
 				numhl = false,
@@ -90,14 +90,14 @@ return {
 			{
 				"<leader>Gk",
 				function()
-					require("gitsigns").nav_hunk('prev')
+					require("gitsigns").nav_hunk("prev")
 				end,
 				desc = "Prev Hunk",
 			},
 			{
 				"<leader>Gj",
 				function()
-					require("gitsigns").nav_hunk('next')
+					require("gitsigns").nav_hunk("next")
 				end,
 				desc = "Next Hunk",
 			},
@@ -177,9 +177,6 @@ return {
 		event = "VeryLazy",
 		cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
 	},
-	-- Git related plugins
-	"tpope/vim-fugitive",
-	"tpope/vim-rhubarb",
 
 	-- not git, but it's okay
 	{

@@ -133,7 +133,8 @@ autocmd("FileType", {
 -- })
 
 -- Run gofmt + goimport on save
-local goimport_sync_grp = autocmd("GoImport", {})
+-- local goimport_sync_grp = autocmd("GoImport", {})
+
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.go",
 	callback = function()

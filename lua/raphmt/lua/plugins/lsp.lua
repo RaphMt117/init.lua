@@ -65,31 +65,31 @@ return {
 						desc = "Copy File Path and Line Number",
 					},
 
-					W = {
-						name = "+Workspace",
-						a = { vim.lsp.buf.add_workspace_folder, "Add Folder" },
-						r = { vim.lsp.buf.remove_workspace_folder, "Remove Folder" },
-						l = {
-							function()
-								print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-							end,
-							"List Folders",
-						},
-					},
-
-					{ "<leader>Wa", vim.lsp.buf.add_workspace_folder, desc = "Workspace Add Folder" },
-					{
-						"<leader>Wr",
-						vim.lsp.buf.remove_workspace_folder,
-						desc = "Workspace Remove Folder",
-					},
-					{
-						"<leader>Wl",
-						function()
-							print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-						end,
-						desc = "Workspace List Folders",
-					},
+					-- W = {
+					-- 	name = "+Workspace",
+					-- 	a = { vim.lsp.buf.add_workspace_folder, "Add Folder" },
+					-- 	r = { vim.lsp.buf.remove_workspace_folder, "Remove Folder" },
+					-- 	l = {
+					-- 		function()
+					-- 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+					-- 		end,
+					-- 		"List Folders",
+					-- 	},
+					-- },
+					--
+					-- { "<leader>Wa", vim.lsp.buf.add_workspace_folder, desc = "Workspace Add Folder" },
+					-- {
+					-- 	"<leader>Wr",
+					-- 	vim.lsp.buf.remove_workspace_folder,
+					-- 	desc = "Workspace Remove Folder",
+					-- },
+					-- {
+					-- 	"<leader>Wl",
+					-- 	function()
+					-- 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+					-- 	end,
+					-- 	desc = "Workspace List Folders",
+					-- },
 				})
 
 				-- Thank you teej
