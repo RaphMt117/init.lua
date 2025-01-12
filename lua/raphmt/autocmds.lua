@@ -65,17 +65,13 @@ autocmd("BufReadPost", {
 autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
 
 -- Enable spell checking for certain file types
-autocmd(
-	{ "BufRead", "BufNewFile" },
-	-- { pattern = { "*.txt", "*.md", "*.tex" }, command = [[setlocal spell<cr> setlocal spelllang=en,de<cr>]] }
-	{
-		pattern = { "*.txt", "*.md", "*.tex", "*.norg" },
-		callback = function()
-			vim.opt.spell = true
-			vim.opt.spelllang = "en,br"
-		end,
-	}
-)
+-- autocmd({ "BufRead", "BufNewFile" }, {
+-- 	pattern = { "*.txt", "*.tex" },
+-- 	callback = function()
+-- 		vim.opt.spell = true
+-- 		vim.opt.spelllang = "en"
+-- 	end,
+-- })
 
 autocmd("ColorScheme", {
 	callback = function()
