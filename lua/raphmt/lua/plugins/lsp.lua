@@ -35,16 +35,16 @@ return {
 				map("gr", require("telescope.builtin").lsp_references, "Goto References")
 				map("gi", require("telescope.builtin").lsp_implementations, "Goto Implementation")
 				map("go", require("telescope.builtin").lsp_type_definitions, "Type Definition")
-				map("<leader>p", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
-				map("<leader>ws", require("telescope.builtin").lsp_workspace_symbols, "Workspace Symbols")
-				map("<leader>Ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
+				map("<leader>lp", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
+				map("<leader>ls", require("telescope.builtin").lsp_workspace_symbols, "Workspace Symbols")
+				map("<leader>lS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
 
 				map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
 				map("K", vim.lsp.buf.hover, "Hover Documentation")
 				map("gs", vim.lsp.buf.signature_help, "Signature Documentation")
 				map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 
-				map("<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
+				map("<leader>lv", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
 
 				local wk = require("which-key")
 				wk.add({
@@ -65,17 +65,17 @@ return {
 						desc = "Copy File Path and Line Number",
 					},
 
-					-- W = {
-					--   name = "+Workspace",
-					--   a = { vim.lsp.buf.add_workspace_folder, "Add Folder" },
-					--   r = { vim.lsp.buf.remove_workspace_folder, "Remove Folder" },
-					--   l = {
-					--     function()
-					--       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-					--     end,
-					--     "List Folders",
-					--   },
-					-- },
+					W = {
+						name = "+Workspace",
+						a = { vim.lsp.buf.add_workspace_folder, "Add Folder" },
+						r = { vim.lsp.buf.remove_workspace_folder, "Remove Folder" },
+						l = {
+							function()
+								print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+							end,
+							"List Folders",
+						},
+					},
 
 					{ "<leader>Wa", vim.lsp.buf.add_workspace_folder, desc = "Workspace Add Folder" },
 					{

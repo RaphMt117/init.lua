@@ -182,10 +182,10 @@ return {
 				completeopt = "menu,menuone,noinsert",
 			},
 			mapping = cmp.mapping.preset.insert({
-				["<C-n>"] = cmp.mapping.select_next_item(),
-				["<C-p>"] = cmp.mapping.select_prev_item(),
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
+				["<C-j>"] = cmp.mapping.select_next_item(),
+				["<C-k>"] = cmp.mapping.select_prev_item(),
+				["<C-h>"] = cmp.mapping.scroll_docs(-4),
+				["<C-l>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete({}),
 				["<C-y>"] = cmp.mapping.confirm({ select = true }),
 				["<CR>"] = cmp.mapping.confirm({
@@ -216,7 +216,6 @@ return {
 				documentation = cmp.config.window.bordered(),
 			},
 			sources = {
-				{ name = "copilot" },
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lua" },
 				{ name = "luasnip" },
@@ -236,7 +235,6 @@ return {
 						vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
 						-- Source
 						vim_item.menu = ({
-							copilot = "[Copilot]",
 							nvim_lsp = "[LSP]",
 							nvim_lua = "[Lua]",
 							luasnip = "[LuaSnip]",

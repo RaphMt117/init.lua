@@ -1,5 +1,4 @@
 return {
-
 	-- formatter
 	{
 		"stevearc/conform.nvim",

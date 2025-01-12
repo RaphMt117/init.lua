@@ -64,7 +64,7 @@ return {
 				incremental_selection = {
 					enable = true,
 					keymaps = {
-						init_selection = "<leader>vv",
+						init_selection = "<leader>V",
 						node_incremental = "+",
 						scope_incremental = false,
 						node_decremental = "_",
@@ -113,7 +113,7 @@ return {
 						},
 					},
 					swap = {
-						enable = true,
+						enable = false,
 						swap_next = {
 							["<leader>a"] = "@parameter.inner",
 						},

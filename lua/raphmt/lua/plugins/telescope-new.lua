@@ -7,145 +7,197 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
+			"debugloop/telescope-undo.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-telescope/telescope-ui-select.nvim",
 			"telescope-dap.nvim",
 			"kkharji/sqlite.lua",
 			-- "nvim-telescope/telescope-frecency.nvim",
 		},
+
 		keys = {
-			-- f = { require("config.utils").telescope_git_or_file, "Find Files (Root)" },
-			-- map("<leader>o", require("telescope.builtin").buffers, "Buffers")
 			-- {
-			--   "<leader>gt", ":Telescope golang_test_files<cr>", desc = "Search golang Tests",
+			-- 	"<leader>ft",
+			-- 	":Telescope golang_test_files<cr>",
+			-- 	desc = "Search golang Tests",
 			-- },
 
 			{
-				"<leader>f",
+				"<leader><Space>",
 				function()
 					require("raphmt.lua.config.utils").telescope_git_or_file()
 				end,
 				desc = "Find Files (Root)",
 			},
+
 			{
-				"<leader>o",
+				"<leader>fb",
 				function()
 					require("telescope.builtin").buffers()
 				end,
 				desc = "Buffers",
 			},
+
 			{
-				"<leader>sf",
-				function()
-					require("telescope.builtin").find_files()
-				end,
-				desc = "Find File (CWD)",
-			},
-			{
-				"<leader>sg",
+				"<leader>fgf",
 				function()
 					require("telescope.builtin").git_files()
 				end,
 				desc = "Search Git Files",
 			},
+
 			{
-				"<leader>sh",
+				"<leader>f?",
 				function()
 					require("telescope.builtin").help_tags()
 				end,
 				desc = "Find Help",
 			},
+
 			{
-				"<leader>sH",
+				"<leader>fh",
 				function()
 					require("telescope.builtin").highlights()
 				end,
 				desc = "Find highlight groups",
 			},
+
 			{
-				"<leader>sM",
+				"<leader>fm",
 				function()
 					require("telescope.builtin").man_pages()
 				end,
-				desc = "Map Pages",
+				desc = "Man Pages",
 			},
+
 			{
-				"<leader>so",
+				"<leader>fo",
 				function()
 					require("telescope.builtin").oldfiles()
 				end,
 				desc = "Open Recent File",
 			},
+
 			{
-				"<leader>sR",
+				"<leader>fR",
 				function()
 					require("telescope.builtin").registers()
 				end,
 				desc = "Registers",
 			},
+
 			{
-				"<leader>st",
+				"<leader>fs",
 				function()
 					require("telescope.builtin").live_grep()
 				end,
 				desc = "Live Grep",
 			},
+
 			{
-				"<leader>sT",
+				"<leader>fx",
+				function()
+					require("telescope.builtin").diagnostics()
+				end,
+				desc = "Diagnostics",
+			},
+
+			{
+				"<leader>fS",
 				function()
 					require("telescope.builtin").grep_string()
 				end,
 				desc = "Grep String",
 			},
+
 			{
-				"<leader>sk",
+				"<leader>fk",
 				function()
 					require("telescope.builtin").keymaps()
 				end,
 				desc = "Keymaps",
 			},
+
 			{
-				"<leader>sC",
+				"<leader>fc",
 				function()
 					require("telescope.builtin").commands()
 				end,
 				desc = "Commands",
 			},
+
 			{
-				"<leader>sl",
+				"<leader>f.",
+				function()
+					require("telescope.builtin").current_buffer_fuzzy_find()
+				end,
+				desc = "Find in current buffer",
+			},
+
+			{
+				"<leader>ff",
+				function()
+					require("telescope.builtin").builtin()
+				end,
+				desc = "Commands",
+			},
+
+			{
+				"<leader>fo",
+				function()
+					require("telescope.builtin").oldfiles()
+				end,
+				desc = "Git branches",
+			},
+
+			{
+				"<leader>fu",
+				function()
+					require("telescope.builtin").undo()
+				end,
+				desc = "Undo",
+			},
+
+			{
+				"<leader>fl",
 				function()
 					require("telescope.builtin").resume()
 				end,
 				desc = "Resume last search",
 			},
+
 			{
-				"<leader>sc",
+				"<leader>fgc",
 				function()
 					require("telescope.builtin").git_commits()
 				end,
 				desc = "Git commits",
 			},
+
 			{
-				"<leader>sB",
+				"<leader>fgb",
 				function()
 					require("telescope.builtin").git_branches()
 				end,
 				desc = "Git branches",
 			},
+
 			{
-				"<leader>sm",
+				"<leader>fgs",
 				function()
 					require("telescope.builtin").git_status()
 				end,
 				desc = "Git status",
 			},
+
 			{
-				"<leader>sS",
+				"<leader>fgS",
 				function()
 					require("telescope.builtin").git_stash()
 				end,
 				desc = "Git stash",
 			},
+
 			-- {
 			--   "<leader>se",
 			--   function()
@@ -153,13 +205,6 @@ return {
 			--   end,
 			--   desc = "Frecency",
 			-- },
-			{
-				"<leader>sb",
-				function()
-					require("telescope.builtin").buffers()
-				end,
-				desc = "Buffers",
-			},
 		},
 		config = function()
 			local telescope = require("telescope")
@@ -178,12 +223,12 @@ return {
 			})
 
 			-- local function formattedName(_, path)
-			--   local tail = vim.fs.basename(path)
-			--   local parent = vim.fs.dirname(path)
-			--   if parent == "." then
-			--     return tail
-			--   end
-			--   return string.format("%s\t\t%s", tail, parent)
+			-- 	local tail = vim.fs.basename(path)
+			-- 	local parent = vim.fs.dirname(path)
+			-- 	if parent == "." then
+			-- 		return tail
+			-- 	end
+			-- 	return string.format("%s\t\t%s", tail, parent)
 			-- end
 
 			local function document_symbols_for_selected(prompt_bufnr)
@@ -372,10 +417,10 @@ return {
 					buffers = {
 						mappings = {
 							i = {
-								["<c-d>"] = actions.delete_buffer,
+								["<c-x>"] = actions.delete_buffer,
 							},
 							n = {
-								["<c-d>"] = actions.delete_buffer,
+								["<c-x>"] = actions.delete_buffer,
 							},
 						},
 						previewer = false,
@@ -420,7 +465,13 @@ return {
 						fuzzy = true, -- false will only do exact matching
 						override_generic_sorter = true, -- override the generic sorter
 						override_file_sorter = true, -- override the file sorter
-						case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+						case_mode = "ignore_case", -- "ignore_case" "respect_case" "smart_case"
+					},
+					undo = {
+						side_by_side = true,
+						-- diff_context_lines = vim.o.scrolloff,
+						vim_diff_opts = { ctxlen = 0 },
+						saved_only = false,
 					},
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({
@@ -437,10 +488,10 @@ return {
 							},
 						}),
 					},
-					package_info = {
-						-- Optional theme (the extension doesn't set a default theme)
-						-- theme = "ivy",
-					},
+					-- package_info = {
+					-- 	-- Optional theme (the extension doesn't set a default theme)
+					-- 	-- theme = "ivy",
+					-- },
 					-- frecency = {
 					--   default_workspace = "CWD",
 					--   show_scores = true,
@@ -453,7 +504,7 @@ return {
 					--   },
 					-- },
 				},
-				-- golang_test_files = require('config.telescope.golang_test_files'),
+				-- golang_test_files = require("raphmt.lua.telescope._extensions.golang_test_files"),
 			})
 			telescope.load_extension("fzf")
 			telescope.load_extension("ui-select")
@@ -461,8 +512,9 @@ return {
 			telescope.load_extension("dap")
 			-- telescope.load_extension("frecency")
 			telescope.load_extension("notify")
-			telescope.load_extension("package_info")
-			-- telescope.load_extension('golang_test_files')
+			-- telescope.load_extension("package_info")
+			telescope.load_extension("undo")
+			-- telescope.load_extension("golang_test_files")
 			-- telescope.load_extension("makefile_targets")
 		end,
 	},

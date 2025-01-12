@@ -5,19 +5,28 @@ return {
 		opts = {},
 	},
 
-	-- delete buffer
+	-- autopairs
 	{
-		"famiu/bufdelete.nvim",
-		event = "VeryLazy",
-		config = function()
-			vim.keymap.set(
-				"n",
-				"Q",
-				":lua require('bufdelete').bufdelete(0, false)<cr>",
-				{ noremap = true, silent = true, desc = "Delete buffer" }
-			)
-		end,
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+		-- use opts = {} for passing setup options
+		-- this is equivalent to setup({}) function
 	},
+
+	-- delete buffer
+	-- {
+	-- 	"famiu/bufdelete.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		vim.keymap.set(
+	-- 			"n",
+	-- 			"Q",
+	-- 			":lua require('bufdelete').bufdelete(0, false)<cr>",
+	-- 			{ noremap = true, silent = true, desc = "Delete buffer" }
+	-- 		)
+	-- 	end,
+	-- },
 
 	-- comments
 	{
@@ -42,7 +51,7 @@ return {
 	{
 		"j-hui/fidget.nvim",
 		branch = "legacy",
-		enabled = false,
+		enabled = true,
 		config = function()
 			require("fidget").setup({
 				window = { blend = 0 },
@@ -67,25 +76,25 @@ return {
 	-- find and replace
 	{
 		"windwp/nvim-spectre",
-		enabled = false,
+		enabled = true,
 		event = "BufRead",
 		keys = {
 			{
-				"<leader>Rr",
+				"<leader>rr",
 				function()
 					require("spectre").open()
 				end,
 				desc = "Replace",
 			},
 			{
-				"<leader>Rw",
+				"<leader>rw",
 				function()
 					require("spectre").open_visual({ select_word = true })
 				end,
 				desc = "Replace Word",
 			},
 			{
-				"<leader>Rf",
+				"<leader>rf",
 				function()
 					require("spectre").open_file_search()
 				end,
@@ -105,9 +114,9 @@ return {
 	},
 
 	-- Heuristically set buffer options
-	{
-		"tpope/vim-sleuth",
-	},
+	-- {
+	-- 	"tpope/vim-sleuth",
+	-- },
 
 	{
 		{
@@ -139,6 +148,7 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPost", "BufNewFile" },
 		main = "ibl",
+		enabled = false,
 		opts = {
 			char = "┊",
 			-- char = "│",
@@ -177,7 +187,6 @@ return {
 				end,
 			})
 		end,
-		enabled = true,
 	},
 
 	-- editor config support
@@ -186,36 +195,36 @@ return {
 	},
 
 	-- Enhanced f/t motions for Leap
-	{
-		"ggandor/flit.nvim",
-		keys = function()
-			---@type LazyKeys[]
-			local ret = {}
-			for _, key in ipairs({ "f", "F", "t", "T" }) do
-				ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
-			end
-			return ret
-		end,
-		opts = { labeled_modes = "nx" },
-	},
+	-- {
+	-- 	"ggandor/flit.nvim",
+	-- 	keys = function()
+	-- 		---@type LazyKeys[]
+	-- 		local ret = {}
+	-- 		for _, key in ipairs({ "f", "F", "t", "T" }) do
+	-- 			ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
+	-- 		end
+	-- 		return ret
+	-- 	end,
+	-- 	opts = { labeled_modes = "nx" },
+	-- },
 	-- mouse replacement
-	{
-		"ggandor/leap.nvim",
-		keys = {
-			{ "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
-			{ "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
-			{ "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
-		},
-		config = function(_, opts)
-			local leap = require("leap")
-			for k, v in pairs(opts) do
-				leap.opts[k] = v
-			end
-			leap.add_default_mappings(true)
-			vim.keymap.del({ "x", "o" }, "x")
-			vim.keymap.del({ "x", "o" }, "X")
-		end,
-	},
+	-- {
+	-- 	"ggandor/leap.nvim",
+	-- 	keys = {
+	-- 		{ "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
+	-- 		{ "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+	-- 		{ "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		local leap = require("leap")
+	-- 		for k, v in pairs(opts) do
+	-- 			leap.opts[k] = v
+	-- 		end
+	-- 		leap.add_default_mappings(true)
+	-- 		vim.keymap.del({ "x", "o" }, "x")
+	-- 		vim.keymap.del({ "x", "o" }, "X")
+	-- 	end,
+	-- },
 
 	{
 		"utilyre/barbecue.nvim",
@@ -249,6 +258,7 @@ return {
 			})
 		end,
 	},
+
 	-- persist sessions
 	{
 		"folke/persistence.nvim",
@@ -256,63 +266,39 @@ return {
 		opts = {},
 	},
 
-	-- better code annotation
-	{
-		"danymat/neogen",
-		enabled = false,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"L3MON4D3/LuaSnip",
-		},
-		config = function()
-			local neogen = require("neogen")
-
-			neogen.setup({
-				snippet_engine = "luasnip",
-			})
-		end,
-		keys = {
-			{
-				"<leader>ng",
-				function()
-					require("neogen").generate()
-				end,
-				desc = "Generate code annotations",
-			},
-			{
-				"<leader>nf",
-				function()
-					require("neogen").generate({ type = "func" })
-				end,
-				desc = "Generate Function Annotation",
-			},
-			{
-				"<leader>nt",
-				function()
-					require("neogen").generate({ type = "type" })
-				end,
-				desc = "Generate Type Annotation",
-			},
-		},
-	},
-
 	{
 		"echasnovski/mini.nvim",
+		event = "VeryLazy",
+		version = false,
 		config = function()
-			-- Better Around/Inside textobjects
-			--
-			-- Examples:
-			--  - va)  - [V]isually select [A]round [)]paren
-			--  - yinq - [Y]ank [I]nside [N]ext [']quote
-			--  - ci'  - [C]hange [I]nside [']quote
-			require("mini.ai").setup({ n_lines = 500 })
+			require("mini.move").setup({
+				-- Module mappings. Use `''` (empty string) to disable one.
+				mappings = {
+					-- Visual mode.
+					left = "<S-h>",
+					right = "<S-l>",
+					down = "<S-j>",
+					up = "<S-k>",
+
+					-- Normal mode - disabled
+					line_left = "",
+					line_right = "",
+					line_down = "",
+					line_up = "",
+				},
+				options = {
+					reindent_linewise = true,
+				},
+			})
 
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
 			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
 			-- - sd'   - [S]urround [D]elete [']quotes
 			-- - sr)'  - [S]urround [R]eplace [)] [']
-			require("mini.surround").setup()
+			require("mini.surround").setup({
+				custom_surroundings = nil,
+			})
 
 			require("mini.pairs").setup()
 
@@ -327,47 +313,27 @@ return {
 		end,
 	},
 
-	{
-		"echasnovski/mini.icons",
-		enabled = true,
-		opts = {},
-		lazy = true,
-		-- specs = {
-		--   { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
-		-- },
-		-- init = function()
-		--   package.preload["nvim-web-devicons"] = function()
-		--     -- needed since it will be false when loading and mini will fail
-		--     package.loaded["nvim-web-devicons"] = {}
-		--     require("mini.icons").mock_nvim_web_devicons()
-		--     return package.loaded["nvim-web-devicons"]
-		--   end
-		-- end,
-	},
+	-- {
+	-- 	"echasnovski/mini.icons",
+	-- 	enabled = true,
+	-- 	opts = {},
+	-- 	lazy = true,
+	-- 	-- specs = {
+	-- 	--   { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
+	-- 	-- },
+	-- 	-- init = function()
+	-- 	--   package.preload["nvim-web-devicons"] = function()
+	-- 	--     -- needed since it will be false when loading and mini will fail
+	-- 	--     package.loaded["nvim-web-devicons"] = {}
+	-- 	--     require("mini.icons").mock_nvim_web_devicons()
+	-- 	--     return package.loaded["nvim-web-devicons"]
+	-- 	--   end
+	-- 	-- end,
+	-- },
 
 	{
 		"fladson/vim-kitty",
 		"MunifTanjim/nui.nvim",
 		"rcarriga/nvim-notify",
-	},
-	{
-		"nvchad/showkeys",
-		cmd = "ShowkeysToggle",
-		opts = {
-			timeout = 1,
-			maxkeys = 6,
-			-- bottom-left, bottom-right, bottom-center, top-left, top-right, top-center
-			position = "bottom-right",
-		},
-
-		keys = {
-			{
-				"<leader>kt",
-				function()
-					vim.cmd("ShowkeysToggle")
-				end,
-				desc = "Show key presses",
-			},
-		},
 	},
 }

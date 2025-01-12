@@ -7,11 +7,13 @@ return {
 			},
 		},
 	},
+
 	terraformls = {
 		cmd = { "terraform-ls" },
 		arg = { "server" },
 		filetypes = { "terraform", "tf", "terraform-vars" },
 	},
+
 	lua_ls = {
 		settings = {
 			Lua = {
@@ -29,16 +31,14 @@ return {
 			},
 		},
 	},
+
 	bashls = {
 		filetypes = { "sh", "zsh" },
 	},
-	vimls = {
-		filetypes = { "vim" },
-	},
+
 	-- tsserver = {},
 	ts_ls = {},
 	gopls = {},
-	pyright = {},
 
 	solidity_ls_nomicfoundation = {},
 	yamlls = {
@@ -46,7 +46,6 @@ return {
 		filetypes = { "yaml" },
 	},
 
-	zls = {},
 	clangd = {},
 	marksman = {},
 	-- "markdownlint-cli2", "markdown-toc"

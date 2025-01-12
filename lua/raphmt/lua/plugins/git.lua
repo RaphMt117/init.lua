@@ -3,39 +3,39 @@ return {
 		"lewis6991/gitsigns.nvim",
 		lazy = false,
 		config = function()
-			-- local icons = require('config.icons')
+			-- local icons = require('raphmt.lua.config.icons')
 			require("gitsigns").setup({
 				-- signs = {
-				--   add = {
-				--     hl = "GitSignsAdd",
-				--     text = icons.ui.BoldLineLeft,
-				--     numhl = "GitSignsAddNr",
-				--     linehl = "GitSignsAddLn",
-				--   },
-				--   change = {
-				--     hl = "GitSignsChange",
-				--     text = icons.ui.BoldLineLeft,
-				--     numhl = "GitSignsChangeNr",
-				--     linehl = "GitSignsChangeLn",
-				--   },
-				--   delete = {
-				--     hl = "GitSignsDelete",
-				--     text = icons.ui.TriangleShortArrowRight,
-				--     numhl = "GitSignsDeleteNr",
-				--     linehl = "GitSignsDeleteLn",
-				--   },
-				--   topdelete = {
-				--     hl = "GitSignsDelete",
-				--     text = icons.ui.TriangleShortArrowRight,
-				--     numhl = "GitSignsDeleteNr",
-				--     linehl = "GitSignsDeleteLn",
-				--   },
-				--   changedelete = {
-				--     hl = "GitSignsChange",
-				--     text = icons.ui.BoldLineLeft,
-				--     numhl = "GitSignsChangeNr",
-				--     linehl = "GitSignsChangeLn",
-				--   },
+				  -- add = {
+
+				  --   text = icons.ui.BoldLineLeft,
+				  --   numhl = "GitSignsAddNr",
+				  --   linehl = "GitSignsAddLn",
+				  -- },
+				  -- change = {
+				  --   hl = "GitSignsChange",
+				  --   text = icons.ui.BoldLineLeft,
+				  --   numhl = "GitSignsChangeNr",
+				  --   linehl = "GitSignsChangeLn",
+				  -- },
+				  -- delete = {
+				  --   hl = "GitSignsDelete",
+				  --   text = icons.ui.TriangleShortArrowRight,
+				  --   numhl = "GitSignsDeleteNr",
+				  --   linehl = "GitSignsDeleteLn",
+				  -- },
+				  -- topdelete = {
+				  --   hl = "GitSignsDelete",
+				  --   text = icons.ui.TriangleShortArrowRight,
+				  --   numhl = "GitSignsDeleteNr",
+				  --   linehl = "GitSignsDeleteLn",
+				  -- },
+				  -- changedelete = {
+				  --   hl = "GitSignsChange",
+				  --   text = icons.ui.BoldLineLeft,
+				  --   numhl = "GitSignsChangeNr",
+				  --   linehl = "GitSignsChangeLn",
+				  -- },
 				-- },
 				signcolumn = true,
 				numhl = false,
@@ -68,21 +68,21 @@ return {
 				-- yadm = { enable = false },
 
 				on_attach = function(bufnr)
-					vim.keymap.set(
-						"n",
-						"<leader>H",
-						require("gitsigns").preview_hunk,
-						{ buffer = bufnr, desc = "Preview git hunk" }
-					)
-
-					vim.keymap.set("n", "]]", require("gitsigns").next_hunk, { buffer = bufnr, desc = "Next git hunk" })
-
-					vim.keymap.set(
-						"n",
-						"[[",
-						require("gitsigns").prev_hunk,
-						{ buffer = bufnr, desc = "Previous git hunk" }
-					)
+					-- vim.keymap.set(
+					-- 	"n",
+					-- 	"<leader>H",
+					-- 	require("gitsigns").preview_hunk,
+					-- 	{ buffer = bufnr, desc = "Preview git hunk" }
+					-- )
+					--
+					-- vim.keymap.set("n", "]]", require("gitsigns").next_hunk, { buffer = bufnr, desc = "Next git hunk" })
+					--
+					-- vim.keymap.set(
+					-- 	"n",
+					-- 	"[[",
+					-- 	require("gitsigns").prev_hunk,
+					-- 	{ buffer = bufnr, desc = "Previous git hunk" }
+					-- )
 				end,
 			})
 		end,
@@ -90,9 +90,16 @@ return {
 			{
 				"<leader>Gk",
 				function()
-					require("gitsigns").prev_hunk({ navigation_message = false })
+					require("gitsigns").nav_hunk('prev')
 				end,
 				desc = "Prev Hunk",
+			},
+			{
+				"<leader>Gj",
+				function()
+					require("gitsigns").nav_hunk('next')
+				end,
+				desc = "Next Hunk",
 			},
 			{
 				"<leader>Gl",
@@ -102,7 +109,7 @@ return {
 				desc = "Blame",
 			},
 			{
-				"<leader>Gp",
+				"<leader>GP",
 				function()
 					require("gitsigns").preview_hunk()
 				end,
@@ -121,13 +128,6 @@ return {
 					require("gitsigns").reset_buffer()
 				end,
 				desc = "Reset Buffer",
-			},
-			{
-				"<leader>Gj",
-				function()
-					require("gitsigns").next_hunk({ navigation_message = false })
-				end,
-				desc = "Next Hunk",
 			},
 			{
 				"<leader>Gs",

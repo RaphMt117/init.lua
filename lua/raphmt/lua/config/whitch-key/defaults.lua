@@ -8,10 +8,12 @@ return {
 	-- P = { require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols" },
 	-- f = { require("config.utils").telescope_git_or_file, "Find Files (Root)" },
 	-- v = "Go to definition in a split",
-	a = "Swap next param",
-	A = "Swap previous param",
-	o = { require("telescope.builtin").buffers, "Open Buffer" },
-	W = { "<cmd>noautocmd w<cr>", "Save without formatting (noautocmd)" },
+
+	-- a = "Swap next param",
+	-- A = "Swap previous param",
+	-- o = { require("telescope.builtin").buffers, "Open Buffer" },
+	-- w = { "<cmd> w <cr>", "Save without formatting (noautocmd)" },
+
 	-- b = {
 	--   r = { "<cmd>Git status<CR>", "Git Status" },
 	-- },

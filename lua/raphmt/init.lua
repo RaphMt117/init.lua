@@ -1,10 +1,3 @@
--- require("raphmt.lazy")
--- require("raphmt.set")
--- require("raphmt.mappings")
--- require("raphmt.autocmds")
--- require("raphmt.util.utils")
--- require("raphmt.util.abbreviations")
-
 require("raphmt.lua.config.keymaps")
 require("raphmt.lua.config.options")
 require("raphmt.lua.config.autocmds")

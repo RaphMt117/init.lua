@@ -23,16 +23,19 @@ return {
 		spec = {
 			{
 				mode = { "n", "v" },
+				{ "<leader>f", group = "Find" },
 				{ "<leader>G", group = "Git" },
-				{ "<leader>R", group = "Replace" },
+
+				{ "<leader>r", group = "Replace" },
 				{ "<leader>l", group = "LSP" },
 				{ "<leader>t", group = "Test" },
-				{ "<leader>s", group = "Search" },
+				-- { "<leader>s", group = "Show" },
 				{ "<leader>x", group = "diagnostics/quickfix" },
 				{ "<leader>n", group = "Gen Annotations" },
-				{ "<leader>N", group = "Package Info" },
+				-- { "<leader>N", group = "Package Info" },
 				{ "<leader>g", group = "Go" },
-				{ "<leader>W", group = "Workspace" },
+
+				-- { "<leader>W", group = "Workspace" },
 				{ "[", group = "prev" },
 				{ "]", group = "next" },
 				{ "g", group = "goto" },
@@ -46,6 +49,13 @@ return {
 				require("which-key").show({ global = false })
 			end,
 			desc = "Buffer Local Keymaps (which-key)",
+		},
+		{
+			"<leader>L",
+			function()
+				require("lazy").show()
+			end,
+			desc = "Lazy",
 		},
 	},
 }

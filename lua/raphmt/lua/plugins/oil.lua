@@ -7,6 +7,9 @@ return {
 		{ "nvim-treesitter/nvim-treesitter" },
 		{ "nvim-tree/nvim-web-devicons", lazy = true },
 	},
+	keys = {
+		{ "<leader>e", ":Oil<CR>", silent = true, desc = "Oil File Explorer" },
+	},
 	init = function()
 		local netrw_bufname
 
@@ -90,6 +93,6 @@ return {
 			show_hidden = true,
 		},
 		use_default_keymaps = false,
-		default_file_explorer = false,
+		default_file_explorer = true,
 	},
 }
