@@ -511,7 +511,7 @@ return {
 			-- telescope.load_extension("refactoring")
 			-- telescope.load_extension("dap")
 			-- telescope.load_extension("frecency")
-			telescope.load_extension("notify")
+			-- telescope.load_extension("notify")
 			-- telescope.load_extension("package_info")
 			telescope.load_extension("undo")
 			-- telescope.load_extension("golang_test_files")
