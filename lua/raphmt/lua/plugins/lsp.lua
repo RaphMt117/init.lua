@@ -40,11 +40,13 @@ return {
 				map("<leader>lS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
 
 				map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
+
 				map("K", vim.lsp.buf.hover, "Hover Documentation")
 				map("gs", vim.lsp.buf.signature_help, "Signature Documentation")
+
 				map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 
-				map("<leader>lv", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
+				map("<leader>ld", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
 
 				local wk = require("which-key")
 				wk.add({
@@ -92,8 +94,6 @@ return {
 					-- },
 				})
 
-				-- Thank you teej
-				-- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#L502
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if client and client.server_capabilities.documentHighlightProvider then
 					local highlight_augroup = vim.api.nvim_create_augroup("nvim-lsp-highlight", { clear = false })
@@ -119,8 +119,6 @@ return {
 			end,
 		})
 
-		-- local capabilities = vim.lsp.protocol.make_client_capabilities()
-		-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
@@ -137,22 +135,13 @@ return {
 			end,
 		})
 
-		-- Gleam LSP
-		-- For some reason mason doesn't work with gleam lsp
-		require("lspconfig").gleam.setup({
-			cmd = { "gleam", "lsp" },
-			filetypes = { "gleam" },
-			root_dir = require("lspconfig").util.root_pattern("gleam.toml", ".git"),
-			capabilities = capabilities,
-		})
-
 		vim.diagnostic.config({
 			title = false,
 			underline = true,
 			virtual_text = true,
 			signs = true,
-			update_in_insert = false,
-			severity_sort = true,
+			update_in_insert = true,
+			severity_sort = false,
 			float = {
 				source = "if_many",
 				style = "minimal",

@@ -21,8 +21,8 @@ return {
 		},
 		{
 			"<leader>xl",
-			"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-			desc = "LSP Definitions / references / ... (Trouble)",
+			"<cmd>Trouble lsp toggle focus=true win.position=right<cr>",
+			desc = "LSP Definitions / references (Trouble)",
 		},
 		{
 			"<leader>xL",

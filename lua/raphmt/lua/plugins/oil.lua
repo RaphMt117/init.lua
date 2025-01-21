@@ -8,7 +8,7 @@ return {
 		{ "nvim-tree/nvim-web-devicons", lazy = true },
 	},
 	keys = {
-		{ "<leader>e", ":Oil<CR>", silent = true, desc = "Oil File Explorer" },
+		{ "<leader>e", ":Oil<CR>", silent = true, desc = "Oil" },
 	},
 	init = function()
 		local netrw_bufname
@@ -62,14 +62,15 @@ return {
 		keymaps = {
 			-- open
 			["<CR>"] = "actions.select",
-			["<Space>o"] = "actions.select",
+			["<C-l>"] = "actions.select",
+
 			-- split
 			["<leader>v"] = "actions.select_vsplit",
 			["<leader>h"] = "actions.select_split",
 
 			-- go back one directory
 			["<BS>"] = "actions.parent",
-			["<leader>p"] = "actions.parent",
+			["C-h"] = "actions.parent",
 
 			-- close
 			["<Esc>"] = "actions.close",
@@ -82,7 +83,7 @@ return {
 			["-"] = "actions.open_cwd", -- open root
 			["<leader>s"] = "actions.change_sort",
 			["<C-p>"] = "actions.preview",
-			["<leader>r"] = "actions.refresh",
+			["C-r"] = "actions.refresh",
 			["?"] = "actions.show_help",
 		},
 		buf_options = {

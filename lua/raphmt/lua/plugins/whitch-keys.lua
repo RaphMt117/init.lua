@@ -24,16 +24,19 @@ return {
 			{
 				mode = { "n", "v" },
 				{ "<leader>f", group = "Find" },
-				{ "<leader>G", group = "Git" },
+				{ "<leader>g", group = "Git" },
+				{ "<leader>gc", group = "Checkout" },
+				{ "<leader>gb", group = "Blame" },
+
+				{ "<leader>T", group = "Tabs" },
 
 				{ "<leader>r", group = "Replace" },
 				{ "<leader>l", group = "LSP" },
 				{ "<leader>t", group = "Test" },
 				-- { "<leader>s", group = "Show" },
-				{ "<leader>x", group = "diagnostics/quickfix" },
-				{ "<leader>n", group = "Gen Annotations" },
+				{ "<leader>x", group = "Trouble" },
+				{ "<leader>n", group = "Neorg" },
 				-- { "<leader>N", group = "Package Info" },
-				{ "<leader>g", group = "Go" },
 
 				-- { "<leader>W", group = "Workspace" },
 				{ "[", group = "prev" },

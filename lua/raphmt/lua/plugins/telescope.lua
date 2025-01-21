@@ -147,7 +147,7 @@ return {
 				function()
 					require("telescope.builtin").oldfiles()
 				end,
-				desc = "Git branches",
+				desc = "Old files",
 			},
 
 			{

@@ -3,39 +3,39 @@ return {
 		"lewis6991/gitsigns.nvim",
 		lazy = false,
 		config = function()
-			-- local icons = require('raphmt.lua.config.icons')
+			-- local icons = require("raphmt.lua.config.icons")
 			require("gitsigns").setup({
 				-- signs = {
-				-- add = {
-
-				--   text = icons.ui.BoldLineLeft,
-				--   numhl = "GitSignsAddNr",
-				--   linehl = "GitSignsAddLn",
-				-- },
-				-- change = {
-				--   hl = "GitSignsChange",
-				--   text = icons.ui.BoldLineLeft,
-				--   numhl = "GitSignsChangeNr",
-				--   linehl = "GitSignsChangeLn",
-				-- },
-				-- delete = {
-				--   hl = "GitSignsDelete",
-				--   text = icons.ui.TriangleShortArrowRight,
-				--   numhl = "GitSignsDeleteNr",
-				--   linehl = "GitSignsDeleteLn",
-				-- },
-				-- topdelete = {
-				--   hl = "GitSignsDelete",
-				--   text = icons.ui.TriangleShortArrowRight,
-				--   numhl = "GitSignsDeleteNr",
-				--   linehl = "GitSignsDeleteLn",
-				-- },
-				-- changedelete = {
-				--   hl = "GitSignsChange",
-				--   text = icons.ui.BoldLineLeft,
-				--   numhl = "GitSignsChangeNr",
-				--   linehl = "GitSignsChangeLn",
-				-- },
+				-- 	add = {
+				--
+				-- 		text = icons.ui.BoldLineLeft,
+				-- 		numhl = "GitSignsAddNr",
+				-- 		linehl = "GitSignsAddLn",
+				-- 	},
+				-- 	change = {
+				-- 		hl = "GitSignsChange",
+				-- 		text = icons.ui.BoldLineLeft,
+				-- 		numhl = "GitSignsChangeNr",
+				-- 		linehl = "GitSignsChangeLn",
+				-- 	},
+				-- 	delete = {
+				-- 		hl = "GitSignsDelete",
+				-- 		text = icons.ui.TriangleShortArrowRight,
+				-- 		numhl = "GitSignsDeleteNr",
+				-- 		linehl = "GitSignsDeleteLn",
+				-- 	},
+				-- 	topdelete = {
+				-- 		hl = "GitSignsDelete",
+				-- 		text = icons.ui.TriangleShortArrowRight,
+				-- 		numhl = "GitSignsDeleteNr",
+				-- 		linehl = "GitSignsDeleteLn",
+				-- 	},
+				-- 	changedelete = {
+				-- 		hl = "GitSignsChange",
+				-- 		text = icons.ui.BoldLineLeft,
+				-- 		numhl = "GitSignsChangeNr",
+				-- 		linehl = "GitSignsChangeLn",
+				-- 	},
 				-- },
 				signcolumn = true,
 				numhl = false,
@@ -65,110 +65,84 @@ return {
 					row = 0,
 					col = 1,
 				},
-				-- yadm = { enable = false },
-
-				on_attach = function(bufnr)
-					-- vim.keymap.set(
-					-- 	"n",
-					-- 	"<leader>H",
-					-- 	require("gitsigns").preview_hunk,
-					-- 	{ buffer = bufnr, desc = "Preview git hunk" }
-					-- )
-					--
-					-- vim.keymap.set("n", "]]", require("gitsigns").next_hunk, { buffer = bufnr, desc = "Next git hunk" })
-					--
-					-- vim.keymap.set(
-					-- 	"n",
-					-- 	"[[",
-					-- 	require("gitsigns").prev_hunk,
-					-- 	{ buffer = bufnr, desc = "Previous git hunk" }
-					-- )
-				end,
 			})
 		end,
 		keys = {
 			{
-				"<leader>Gk",
+				"<leader>gg",
+				function()
+					vim.cmd("!tmux new-window -c" .. vim.fn.getcwd() .. " -- lazygit")
+				end,
+				desc = "Lazygit",
+			},
+			{
+				"<leader>gk",
 				function()
 					require("gitsigns").nav_hunk("prev")
 				end,
-				desc = "Prev Hunk",
+				desc = "Prev change",
 			},
 			{
-				"<leader>Gj",
+				"<leader>gj",
 				function()
 					require("gitsigns").nav_hunk("next")
 				end,
-				desc = "Next Hunk",
+				desc = "Next change",
 			},
 			{
-				"<leader>Gl",
+				"<leader>gbf",
+				function()
+					require("gitsigns").blame()
+				end,
+				desc = "Blame file",
+			},
+			{
+				"<leader>gbl",
 				function()
 					require("gitsigns").blame_line()
 				end,
-				desc = "Blame",
+				desc = "Blame line",
 			},
 			{
-				"<leader>GP",
+				"<leader>gp",
 				function()
 					require("gitsigns").preview_hunk()
 				end,
-				desc = "Preview Hunk",
+				desc = "Changes bellow cursor",
 			},
 			{
-				"<leader>Gr",
-				function()
-					require("gitsigns").reset_hunk()
-				end,
-				desc = "Reset Hunk",
-			},
-			{
-				"<leader>GR",
+				"<leader>gr",
 				function()
 					require("gitsigns").reset_buffer()
 				end,
-				desc = "Reset Buffer",
+				desc = "Reset current buffer changes",
 			},
 			{
-				"<leader>Gs",
-				function()
-					require("gitsigns").stage_hunk()
-				end,
-				desc = "Stage Hunk",
-			},
-			{
-				"<leader>Gu",
-				function()
-					require("gitsigns").undo_stage_hunk()
-				end,
-				desc = "Undo Stage Hunk",
-			},
-			{
-				"<leader>Go",
+				"<leader>go",
 				require("telescope.builtin").git_status,
-				desc = "Open changed file",
+				desc = "Changed files",
 			},
 			{
-				"<leader>Gb",
+				"<leader>gcb",
 				require("telescope.builtin").git_branches,
-				desc = "Checkout branch",
+				desc = "Branch",
 			},
 			{
-				"<leader>Gc",
+				"<leader>gcc",
 				require("telescope.builtin").git_commits,
-				desc = "Checkout commit",
+				desc = "Commit",
 			},
 			{
-				"<leader>GC",
+				"<leader>gcC",
 				require("telescope.builtin").git_bcommits,
-				desc = "Checkout commit(for current file)",
+				desc = "Commit (for current file)",
 			},
 			{
-				"<leader>Gd",
+				"<leader>gd",
 				function()
 					vim.cmd("Gitsigns diffthis HEAD")
 				end,
-				desc = "Git Diff HEAD",
+				desc = "Git Diff",
 			},
 		},
 	},
@@ -176,17 +150,5 @@ return {
 		"sindrets/diffview.nvim",
 		event = "VeryLazy",
 		cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
-	},
-
-	-- not git, but it's okay
-	{
-		"mbbill/undotree",
-		keys = {
-			{
-				"<leader>GU",
-				":UndotreeToggle<CR>",
-				desc = "Toggle UndoTree",
-			},
-		},
 	},
 }
