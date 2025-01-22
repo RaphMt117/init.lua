@@ -288,8 +288,9 @@ return {
 							["<C-s>"] = document_symbols_for_selected,
 							["<C-k>"] = actions.move_selection_previous, -- move to prev result
 							["<C-j>"] = actions.move_selection_next, -- move to next result
-							["<S-v>"] = actions.select_horizontal, -- open in horizontal split
-							["C-/"] = actions.select_vertical, -- open in vertical split
+							["<S-v>"] = actions.select_vertical, -- open in horizontal split
+							["C-/"] = actions.select_horizontal, -- open in vertical split
+							["C-h"] = actions.select_horizontal, -- open in vertical split
 							["<C-l>"] = actions.toggle_selection, -- select
 							["<S-Tab>"] = actions.toggle_selection, -- select
 							["<C-?>"] = "which_key", -- show keys
@@ -303,8 +304,9 @@ return {
 							["<C-s>"] = document_symbols_for_selected,
 							["<C-k>"] = actions.move_selection_previous, -- move to prev result
 							["<C-j>"] = actions.move_selection_next, -- move to next result
-							["<S-v>"] = actions.select_horizontal, -- open in horizontal split
-							["C-/"] = actions.select_vertical, -- open in vertical split
+							["<S-v>"] = actions.select_vertical, -- open in horizontal split
+							["C-/"] = actions.select_horizontal, -- open in vertical split
+							["C-h"] = actions.select_horizontal, -- open in vertical split
 							["<C-l>"] = actions.toggle_selection, -- select
 							["<S-Tab>"] = actions.toggle_selection, -- select
 							["<C-?>"] = "which_key", -- show keys
