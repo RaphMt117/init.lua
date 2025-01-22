@@ -10,24 +10,16 @@ return {
 			"debugloop/telescope-undo.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-telescope/telescope-ui-select.nvim",
-			-- "telescope-dap.nvim",
 			"kkharji/sqlite.lua",
-			-- "nvim-telescope/telescope-frecency.nvim",
 		},
 
 		keys = {
-			-- {
-			-- 	"<leader>ft",
-			-- 	":Telescope golang_test_files<cr>",
-			-- 	desc = "Search golang Tests",
-			-- },
-
 			{
 				"<leader><Space>",
 				function()
-					require("raphmt.lua.config.utils").telescope_git_or_file()
+					require("telescope.builtin").find_files()
 				end,
-				desc = "Find Files (Root)",
+				desc = "Find Files",
 			},
 
 			{
@@ -39,11 +31,25 @@ return {
 			},
 
 			{
-				"<leader>fgf",
+				"<leader>fgg",
 				function()
 					require("telescope.builtin").git_files()
 				end,
 				desc = "Search Git Files",
+			},
+			{
+				"<leader>fgs",
+				function()
+					require("telescope.builtin").git_status()
+				end,
+				desc = "Git status",
+			},
+			{
+				"<leader>fgS",
+				function()
+					require("telescope.builtin").git_stash()
+				end,
+				desc = "Git stash",
 			},
 
 			{
@@ -76,14 +82,6 @@ return {
 					require("telescope.builtin").oldfiles()
 				end,
 				desc = "Open Recent File",
-			},
-
-			{
-				"<leader>fR",
-				function()
-					require("telescope.builtin").registers()
-				end,
-				desc = "Registers",
 			},
 
 			{
@@ -152,10 +150,8 @@ return {
 
 			{
 				"<leader>fu",
-				function()
-					require("telescope.builtin").undo()
-				end,
-				desc = "Undo",
+				"<cmd>Telescope undo<cr>",
+				desc = "Undo history",
 			},
 
 			{
@@ -165,46 +161,6 @@ return {
 				end,
 				desc = "Resume last search",
 			},
-
-			{
-				"<leader>fgc",
-				function()
-					require("telescope.builtin").git_commits()
-				end,
-				desc = "Git commits",
-			},
-
-			{
-				"<leader>fgb",
-				function()
-					require("telescope.builtin").git_branches()
-				end,
-				desc = "Git branches",
-			},
-
-			{
-				"<leader>fgs",
-				function()
-					require("telescope.builtin").git_status()
-				end,
-				desc = "Git status",
-			},
-
-			{
-				"<leader>fgS",
-				function()
-					require("telescope.builtin").git_stash()
-				end,
-				desc = "Git stash",
-			},
-
-			-- {
-			--   "<leader>se",
-			--   function()
-			--     require("telescope.builtin").frecency()
-			--   end,
-			--   desc = "Frecency",
-			-- },
 		},
 		config = function()
 			local telescope = require("telescope")
@@ -222,18 +178,8 @@ return {
 				end,
 			})
 
-			-- local function formattedName(_, path)
-			-- 	local tail = vim.fs.basename(path)
-			-- 	local parent = vim.fs.dirname(path)
-			-- 	if parent == "." then
-			-- 		return tail
-			-- 	end
-			-- 	return string.format("%s\t\t%s", tail, parent)
-			-- end
-
 			local function document_symbols_for_selected(prompt_bufnr)
 				local action_state = require("telescope.actions.state")
-				local actions = require("telescope.actions")
 				local entry = action_state.get_selected_entry()
 
 				if entry == nil then
@@ -333,7 +279,6 @@ return {
 
 			telescope.setup({
 				file_ignore_patterns = { "%.git/." },
-				-- borderchars = { "█", " ", "▀", "█", "█", " ", " ", "▀" },
 				defaults = {
 					mappings = {
 						i = {
@@ -424,7 +369,7 @@ return {
 							},
 						},
 						previewer = false,
-						initial_mode = "normal",
+						initial_mode = "insert",
 						-- theme = "dropdown",
 						layout_config = {
 							height = 0.4,
@@ -443,10 +388,18 @@ return {
 					live_grep = {
 						only_sort_text = true,
 						previewer = true,
+						layout_config = {
+							prompt_position = "top",
+							preview_cutoff = 120,
+						},
 					},
 					grep_string = {
 						only_sort_text = true,
 						previewer = true,
+						layout_config = {
+							prompt_position = "top",
+							preview_cutoff = 120,
+						},
 					},
 					lsp_references = {
 						show_line = false,
@@ -465,7 +418,7 @@ return {
 						fuzzy = true, -- false will only do exact matching
 						override_generic_sorter = true, -- override the generic sorter
 						override_file_sorter = true, -- override the file sorter
-						case_mode = "ignore_case", -- "ignore_case" "respect_case" "smart_case"
+						case_mode = "ignore_case", -- "ignore_case"
 					},
 					undo = {
 						side_by_side = true,
@@ -473,49 +426,13 @@ return {
 						vim_diff_opts = { ctxlen = 0 },
 						saved_only = false,
 					},
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown({
-							previewer = false,
-							initial_mode = "normal",
-							sorting_strategy = "ascending",
-							layout_strategy = "horizontal",
-							layout_config = {
-								horizontal = {
-									width = 0.5,
-									height = 0.4,
-									preview_width = 0.6,
-								},
-							},
-						}),
-					},
-					-- package_info = {
-					-- 	-- Optional theme (the extension doesn't set a default theme)
-					-- 	-- theme = "ivy",
-					-- },
-					-- frecency = {
-					--   default_workspace = "CWD",
-					--   show_scores = true,
-					--   show_unindexed = true,
-					--   disable_devicons = false,
-					--   ignore_patterns = {
-					--     "*.git/*",
-					--     "*/tmp/*",
-					--     "*/lua-language-server/*",
-					--   },
-					-- },
 				},
-				-- golang_test_files = require("raphmt.lua.telescope._extensions.golang_test_files"),
 			})
 			telescope.load_extension("fzf")
 			telescope.load_extension("ui-select")
 			-- telescope.load_extension("refactoring")
 			-- telescope.load_extension("dap")
-			-- telescope.load_extension("frecency")
-			-- telescope.load_extension("notify")
-			-- telescope.load_extension("package_info")
 			telescope.load_extension("undo")
-			-- telescope.load_extension("golang_test_files")
-			-- telescope.load_extension("makefile_targets")
 		end,
 	},
 }
