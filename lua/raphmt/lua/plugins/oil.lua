@@ -1,4 +1,3 @@
--- create, change and delete files like they are text in a buffer
 return {
 	"stevearc/oil.nvim",
 	tag = "v2.10.0",
@@ -8,7 +7,8 @@ return {
 		{ "nvim-tree/nvim-web-devicons", lazy = true },
 	},
 	keys = {
-		{ "<leader>e", ":Oil<CR>", silent = true, desc = "Oil" },
+		-- { "<leader>e", ":Oil<CR>", silent = true, desc = "Oil" },
+		{ "<leader>e", "<cmd>lua require('oil').open_float('.')<CR>", silent = true, desc = "Oil float" },
 	},
 	init = function()
 		local netrw_bufname
@@ -85,6 +85,13 @@ return {
 			["<C-p>"] = "actions.preview",
 			["C-r"] = "actions.refresh",
 			["?"] = "actions.show_help",
+		},
+		float = {
+			padding = 8,
+			max_width = 70,
+			max_height = 60,
+			border = "rounded",
+			preview_split = "right", -- "auto", "left", "right", "above", "below".
 		},
 		buf_options = {
 			buflisted = false,
