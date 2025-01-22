@@ -9,7 +9,16 @@ return {
 	keys = {
 		-- { "<leader>e", ":Neotree toggle float<CR>", silent = true, desc = "Float File Explorer" },
 		-- { "<leader><Tab>", ":Neotree toggle right<CR>", silent = true, desc = "Right File Explorer" },
-		{ "<leader><Tab>", ":Neotree toggle float<CR>", silent = true, desc = "Float File Explorer" },
+		-- { "<leader><Tab>", ":Neotree toggle float<CR>", silent = true, desc = "Float File Explorer" },
+		{ "<leader><Tab>", ":Neotree toggle float reveal_force_cwd<CR>", silent = true, desc = "Float File Explorer" },
+		-- {
+		-- 	"<leader>1",
+		-- 	":Neotree toggle float reveal_force_cwd<CR>",
+		-- 	silent = true,
+		-- 	desc = "Neotree current file",
+		-- },
+		{ "<leader>2", ":Neotree toggle float show buffers<CR>", silent = true, desc = "Float File Explorer" },
+		{ "<leader>3", ":Neotree toggle float git_status<CR>", silent = true, desc = "Float File Explorer" },
 	},
 	config = function()
 		require("neo-tree").setup({
@@ -52,7 +61,7 @@ return {
 			},
 			window = {
 				position = "float",
-				width = 40,
+				width = 30,
 			},
 			filesystem = {
 				use_libuv_file_watcher = true,
@@ -72,7 +81,7 @@ return {
 				winbar = true,
 				sources = {
 					{ source = "filesystem", display_name = "   Files " },
-					{ source = "buffers", display_name = "   Bufs " },
+					{ source = "buffers", display_name = "   Buffers " },
 					{ source = "git_status", display_name = "   Git " },
 				},
 			},
