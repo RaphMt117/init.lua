@@ -2,7 +2,7 @@ return {
 	"goolord/alpha-nvim",
 	enabled = true,
 	event = "VimEnter",
-	lazy = true,
+	lazy = false,
 	opts = function()
 		local dashboard = require("alpha.themes.dashboard")
 		local logo = [[
@@ -13,17 +13,6 @@ return {
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
     ]]
-
-		local notEmacs = [[
-    
-███╗   ██╗ ██████╗ ████████╗    ███████╗███╗   ███╗ █████╗  ██████╗███████╗
-████╗  ██║██╔═══██╗╚══██╔══╝    ██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝
-██╔██╗ ██║██║   ██║   ██║       █████╗  ██╔████╔██║███████║██║     ███████╗
-██║╚██╗██║██║   ██║   ██║       ██╔══╝  ██║╚██╔╝██║██╔══██║██║     ╚════██║
-██║ ╚████║╚██████╔╝   ██║       ███████╗██║ ╚═╝ ██║██║  ██║╚██████╗███████║
-╚═╝  ╚═══╝ ╚═════╝    ╚═╝       ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝
-
-]]
 
 		local notVscode = [[
     
@@ -38,11 +27,10 @@ return {
 		dashboard.section.header.val = vim.split(logo, "\n")
 		dashboard.section.buttons.val = {
 			dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
-			dashboard.button("o", " " .. " Oil ", ":Oil <CR>"),
+			dashboard.button("o", " " .. " Oil ", "<cmd>lua require('oil').open_float('.')<CR>"),
 			-- dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
 			dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
 			dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
-			-- dashboard.button("s", " " .. " Restore Session", '<cmd>lua require("persistence").load()<cr>'),
 			-- dashboard.button("c", " " .. " Config", ":e ~/.config/nvim/ <CR>"),
 			dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
 			dashboard.button("q", " " .. " Quit", ":qa<CR>"),
@@ -76,7 +64,8 @@ return {
 			callback = function()
 				local stats = require("lazy").stats()
 				local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-				dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+				-- dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+				dashboard.section.footer.val = "Loaded " .. stats.count .. " plugins in " .. ms .. "ms"
 				pcall(vim.cmd.AlphaRedraw)
 			end,
 		})
