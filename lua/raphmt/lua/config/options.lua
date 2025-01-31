@@ -37,6 +37,7 @@ o.undodir = os.getenv("HOME") .. "/.vim/undodir"
 o.updatetime = 100 -- faster completion (4000ms default)
 o.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 o.expandtab = true -- convert tabs to spaces
+o.guicursor = "" -- block cursor in insert mode
 o.shiftwidth = 2 -- the number of spaces inserted for each indentation
 o.cursorline = false -- highlight the current line
 o.number = true -- set numbered lines
@@ -67,10 +68,6 @@ o.sidescrolloff = 14
 
 o.conceallevel = 0 -- so that `` is visible in markdown files
 o.concealcursor = "nc"
-
--- go to previous/next line with h,l,left arrow and right arrow
--- when cursor reaches end/beginning of line
-o.whichwrap:append("<>[]hl")
 
 vim.filetype.add({
 	extension = {

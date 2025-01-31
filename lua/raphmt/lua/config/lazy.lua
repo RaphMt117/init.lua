@@ -12,10 +12,23 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ import = "raphmt.lua.plugins" }, {
+require("lazy").setup({
+	{
+		import = "raphmt.lua.plugins",
+		cond = function()
+			return not vim.g.vscode
+		end,
+	},
+	{
+		-- load only when opening from vscode
+		import = "raphmt.lua.vscode-plugins",
+		cond = function()
+			return vim.g.vscode
+		end,
+	},
+}, {
 	install = {
 		missing = true,
-		-- colorscheme = { "catppuccin", "habamax" },
 	},
 	checker = {
 		enabled = true,
@@ -24,19 +37,5 @@ require("lazy").setup({ import = "raphmt.lua.plugins" }, {
 	change_detection = {
 		enabled = true,
 		notify = false,
-	},
-	ui = {
-		-- border = "rounded"
-	},
-	performance = {
-		rtp = {
-			disabled_plugins = {
-				"gzip",
-				"tarPlugin",
-				"tohtml",
-				"tutor",
-				"zipPlugin",
-			},
-		},
 	},
 })

@@ -47,8 +47,7 @@ map("n", "YY", "va{Vy", opts())
 map("n", "j", "gj", opts())
 map("n", "k", "gk", opts())
 
--- Exit on jj and jk
-map("i", "jj", "<ESC>", opts())
+-- Exit on jk
 map("i", "jk", "<ESC>", opts())
 
 -- Navigate buffers
