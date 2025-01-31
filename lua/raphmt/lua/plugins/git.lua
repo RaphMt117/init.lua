@@ -1,7 +1,7 @@
 return {
 	{
 		"lewis6991/gitsigns.nvim",
-		lazy = false,
+		event = "VeryLazy",
 		config = function()
 			-- local icons = require("raphmt.lua.config.icons")
 			require("gitsigns").setup({

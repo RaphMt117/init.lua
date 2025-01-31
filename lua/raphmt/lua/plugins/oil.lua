@@ -8,7 +8,7 @@ return {
 	},
 	keys = {
 		-- { "<leader>e", ":Oil<CR>", silent = true, desc = "Oil" },
-		{ "<leader>e", "<cmd>lua require('oil').open_float('.')<CR>", silent = true, desc = "Oil float" },
+		{ "<leader>e", "<cmd>Oil --float<CR>", silent = true, desc = "Oil float" },
 	},
 	init = function()
 		local netrw_bufname
