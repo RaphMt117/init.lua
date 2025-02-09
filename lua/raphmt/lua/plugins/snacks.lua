@@ -33,13 +33,10 @@ return {
 				Snacks.picker.smart()
 			end,
 			desc = "Smart Find Files",
-		},
-		{
-			"<leader>,",
-			function()
-				Snacks.picker.buffers()
-			end,
-			desc = "Buffers",
+			-- custom telescope
+			-- function()
+			-- 	require("telescope.builtin").find_files()
+			-- end,
 		},
 		{
 			"<leader>/",
@@ -166,25 +163,18 @@ return {
 			desc = "Autocmds",
 		},
 		{
-			"<leader>sb",
-			function()
-				Snacks.picker.lines()
-			end,
-			desc = "Buffer Lines",
-		},
-		{
 			"<leader>sc",
-			function()
-				Snacks.picker.command_history()
-			end,
-			desc = "Command History",
-		},
-		{
-			"<leader>sC",
 			function()
 				Snacks.picker.commands()
 			end,
 			desc = "Commands",
+		},
+		{
+			"<leader>sC",
+			function()
+				Snacks.picker.command_history()
+			end,
+			desc = "Command History",
 		},
 		{
 			"<leader>sd",
@@ -257,13 +247,6 @@ return {
 			desc = "Quickfix List",
 		},
 		{
-			"<leader>sR",
-			function()
-				Snacks.picker.resume()
-			end,
-			desc = "Resume",
-		},
-		{
 			"<leader>su",
 			function()
 				Snacks.picker.undo()
@@ -271,7 +254,7 @@ return {
 			desc = "Undo History",
 		},
 		{
-			"<leader>uC",
+			"<leader>C",
 			function()
 				Snacks.picker.colorschemes()
 			end,
@@ -308,11 +291,11 @@ return {
 			desc = "Goto Implementation",
 		},
 		{
-			"gy",
+			"gt",
 			function()
 				Snacks.picker.lsp_type_definitions()
 			end,
-			desc = "Goto T[y]pe Definition",
+			desc = "Goto Type Definition",
 		},
 		{
 			"<leader>ss",
@@ -385,13 +368,6 @@ return {
 				Snacks.lazygit()
 			end,
 			desc = "Lazygit",
-		},
-		{
-			"<leader>un",
-			function()
-				Snacks.notifier.hide()
-			end,
-			desc = "Dismiss All Notifications",
 		},
 		{
 			"<c-/>",

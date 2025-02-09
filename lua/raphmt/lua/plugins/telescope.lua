@@ -15,44 +15,6 @@ return {
 
 		keys = {
 			{
-				"<leader><Space>",
-				function()
-					require("telescope.builtin").find_files()
-				end,
-				desc = "Find Files",
-			},
-
-			{
-				"<leader>fb",
-				function()
-					require("telescope.builtin").buffers()
-				end,
-				desc = "Buffers",
-			},
-
-			{
-				"<leader>fgg",
-				function()
-					require("telescope.builtin").git_files()
-				end,
-				desc = "Search Git Files",
-			},
-			{
-				"<leader>fgs",
-				function()
-					require("telescope.builtin").git_status()
-				end,
-				desc = "Git status",
-			},
-			{
-				"<leader>fgS",
-				function()
-					require("telescope.builtin").git_stash()
-				end,
-				desc = "Git stash",
-			},
-
-			{
 				"<leader>f?",
 				function()
 					require("telescope.builtin").help_tags()
