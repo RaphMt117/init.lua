@@ -24,19 +24,54 @@ return {
 				wo = { wrap = true }, -- Wrap notifications
 			},
 		},
+		terminal = {
+			bo = {
+				filetype = "snacks_terminal",
+			},
+			wo = {},
+			keys = {
+				q = "hide",
+				gf = function(self)
+					local f = vim.fn.findfile(vim.fn.expand("<cfile>"), "**")
+					if f == "" then
+						Snacks.notify.warn("No file under cursor")
+					else
+						self:hide()
+						vim.schedule(function()
+							vim.cmd("e " .. f)
+						end)
+					end
+				end,
+				term_normal = {
+					"<esc>",
+					function(self)
+						self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
+						if self.esc_timer:is_active() then
+							self.esc_timer:stop()
+							vim.cmd("stopinsert")
+						else
+							self.esc_timer:start(200, 0, function() end)
+							return "<esc>"
+						end
+					end,
+					mode = "t",
+					expr = true,
+					desc = "Double escape to normal mode",
+				},
+			},
+		},
 	},
 	keys = {
 		-- Top Pickers & Explorer
 		{
 			"<leader><space>",
+			-- function()
+			-- 	Snacks.picker.smart()
+			-- end,
 			function()
-				Snacks.picker.smart()
+				require("telescope.builtin").find_files()
 			end,
 			desc = "Smart Find Files",
-			-- custom telescope
-			-- function()
-			-- 	require("telescope.builtin").find_files()
-			-- end,
 		},
 		{
 			"<leader>/",
@@ -45,6 +80,14 @@ return {
 			end,
 			desc = "Grep",
 		},
+		-- telescope alternative
+		-- {
+		-- 	"<leader>fs",
+		-- 	function()
+		-- 		require("telescope.builtin").live_grep()
+		-- 	end,
+		-- 	desc = "Live Grep",
+		-- },
 		{
 			"<leader>:",
 			function()
@@ -86,7 +129,7 @@ return {
 			function()
 				Snacks.picker.recent()
 			end,
-			desc = "Recent",
+			desc = "Recent files",
 		},
 		-- git
 		{
@@ -147,6 +190,13 @@ return {
 			desc = "Visual selection or word",
 			mode = { "n", "x" },
 		},
+		{
+			"<leader>f.",
+			function()
+				require("telescope.builtin").current_buffer_fuzzy_find()
+			end,
+			desc = "Find in current buffer",
+		},
 		-- search
 		{
 			"<leader>s/",
@@ -177,7 +227,7 @@ return {
 			desc = "Command History",
 		},
 		{
-			"<leader>sd",
+			"<leader>sx",
 			function()
 				Snacks.picker.diagnostics()
 			end,
