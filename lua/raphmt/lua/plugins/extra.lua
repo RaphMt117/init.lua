@@ -12,20 +12,6 @@ return {
 		config = true,
 	},
 
-	-- delete buffer
-	-- {
-	-- 	"famiu/bufdelete.nvim",
-	-- 	event = "VeryLazy",
-	-- 	config = function()
-	-- 		vim.keymap.set(
-	-- 			"n",
-	-- 			"Q",
-	-- 			":lua require('bufdelete').bufdelete(0, false)<cr>",
-	-- 			{ noremap = true, silent = true, desc = "Delete buffer" }
-	-- 		)
-	-- 	end,
-	-- },
-
 	-- comments
 	{
 		"numToStr/Comment.nvim",
@@ -53,20 +39,6 @@ return {
 		config = function()
 			require("fidget").setup({
 				window = { blend = 0 },
-			})
-		end,
-	},
-
-	-- Smooth scrolling neovim plugin written in lua
-	{
-		"karb94/neoscroll.nvim",
-		-- enabled = false,
-		config = function()
-			require("neoscroll").setup({
-				stop_eof = true,
-				easing_function = "sine",
-				hide_cursor = true,
-				cursor_scrolls_alone = true,
 			})
 		end,
 	},
@@ -111,11 +83,6 @@ return {
 		end,
 	},
 
-	-- Heuristically set buffer options
-	-- {
-	-- 	"tpope/vim-sleuth",
-	-- },
-
 	{
 		{
 			"folke/lazydev.nvim",
@@ -128,63 +95,17 @@ return {
 				},
 			},
 		},
-		-- { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-		-- { -- optional completion source for require statements and module annotations
-		-- 	"hrsh7th/nvim-cmp",
-		-- 	opts = function(_, opts)
-		-- 		opts.sources = opts.sources or {}
-		-- 		table.insert(opts.sources, {
-		-- 			name = "lazydev",
-		-- 			group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-		-- 		})
-		-- 	end,
-		-- },
-	},
-
-	-- Indent guide for Neovim
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufReadPost", "BufNewFile" },
-		main = "ibl",
-		enabled = false,
-		opts = {
-			char = "┊",
-			-- char = "│",
-			-- char = "▏",
-			-- char = "│",
-			filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
-			show_trailing_blankline_indent = false,
-			show_current_context = false,
+		{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+		{ -- optional completion source for require statements and module annotations
+			"hrsh7th/nvim-cmp",
+			opts = function(_, opts)
+				opts.sources = opts.sources or {}
+				table.insert(opts.sources, {
+					name = "lazydev",
+					group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+				})
+			end,
 		},
-		config = function()
-			local api = vim.api
-
-			local exclude_ft =
-				{ "help", "git", "markdown", "snippets", "norg", "text", "gitconfig", "alpha", "dashboard" }
-
-			require("ibl").setup({
-				scope = {
-					show_start = false,
-					show_end = false,
-				},
-				exclude = {
-					filetypes = exclude_ft,
-					buftypes = { "terminal" },
-				},
-			})
-
-			local gid = api.nvim_create_augroup("indent_blankline", { clear = true })
-
-			api.nvim_create_autocmd("InsertLeave", {
-				pattern = "*",
-				group = gid,
-				callback = function()
-					if not vim.tbl_contains(exclude_ft, vim.bo.filetype) then
-						vim.cmd([[IBLEnable]])
-					end
-				end,
-			})
-		end,
 	},
 
 	-- Enhanced f/t motions for Leap
@@ -253,13 +174,6 @@ return {
 		end,
 	},
 
-	-- persist sessions
-	{
-		"folke/persistence.nvim",
-		event = "BufReadPre", -- this will only start session saving when an actual file was opened
-		opts = {},
-	},
-
 	{
 		"echasnovski/mini.nvim",
 		event = "VeryLazy",
@@ -307,32 +221,10 @@ return {
 		end,
 	},
 
-	-- {
-	-- 	"echasnovski/mini.icons",
-	-- 	enabled = true,
-	-- 	opts = {},
-	-- 	lazy = true,
-	-- 	-- specs = {
-	-- 	--   { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
-	-- 	-- },
-	-- 	-- init = function()
-	-- 	--   package.preload["nvim-web-devicons"] = function()
-	-- 	--     -- needed since it will be false when loading and mini will fail
-	-- 	--     package.loaded["nvim-web-devicons"] = {}
-	-- 	--     require("mini.icons").mock_nvim_web_devicons()
-	-- 	--     return package.loaded["nvim-web-devicons"]
-	-- 	--   end
-	-- 	-- end,
-	-- },
-
 	{
 		"ThePrimeagen/vim-be-good",
 		event = "VeryLazy",
 	},
-	{ "tpope/vim-fugitive", event = "VeryLazy" },
 
-	{
-		"MunifTanjim/nui.nvim",
-		-- "rcarriga/nvim-notify",
-	},
+	{ "tpope/vim-fugitive", event = "VeryLazy" },
 }
