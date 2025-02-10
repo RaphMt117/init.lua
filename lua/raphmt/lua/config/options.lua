@@ -1,17 +1,15 @@
 local o = vim.opt
 local g = vim.g
 
+g.mapleader = " "
+g.maplocalleader = " "
+
 -- define root dir based in:
 g.root_spec = { { ".git", "lua" }, "lsp", "cwd" }
 
-g.mapleader = " " -- change leader to a space
-g.maplocalleader = " " -- change localleader to a space
-
 g.autoformat = true -- nvim autoformat
-
 g.loaded_netrw = 1 -- disable netrw
 g.loaded_netrwPlugin = 1 --  disable netrw
-
 o.incsearch = true -- make search act like search in modern browsers
 o.backup = false -- creates a backup file
 o.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
@@ -50,65 +48,20 @@ o.ruler = false -- Don't show the ruler
 o.guifont = "monospace:h17" -- the font used in graphical neovim applications
 o.title = true -- set the title of window to the value of the titlestring
 o.fillchars = { eob = " " } -- change the character at the end of buffer
-
--- vim.o.cursorlineopt = "number"              -- set the cursorline
-
 o.tabstop = 4 -- insert 4 spaces for a tab
 o.softtabstop = 4
 o.expandtab = true
 o.shiftwidth = 4
 o.smartindent = false
-
 o.laststatus = 0 -- Always display the status line
-
 o.wrap = true
-
 o.scrolloff = 10
 o.sidescrolloff = 14
-
 o.conceallevel = 0 -- so that `` is visible in markdown files
 o.concealcursor = "nc"
-
-vim.filetype.add({
-	extension = {
-		env = "dotenv",
-	},
-	filename = {
-		[".env"] = "dotenv",
-		["env"] = "dotenv",
-	},
-	pattern = {
-		["[jt]sconfig.*.json"] = "jsonc",
-		["%.env%.[%w_.-]+"] = "dotenv",
-	},
-})
-
--- shortmess
--- I -> don't show intro message
--- O -> file-read message overwrites previous
--- o -> file-read message
--- c -> completion messages
--- T -> truncate file messages at start
--- t -> truncate file messages in middle
--- l -> use internal grep
--- i -> case insensitive search
-o.shortmess = "IOocTtli"
-
 o.autoread = true -- automatic reload file on buffer changed outside of vim
-
 o.splitkeep = "screen"
 o.splitkeep = "topline" -- Stabilize the cursor position when creating/deleting horizontal splits
-
 o.formatoptions = vim.o.formatoptions .. "n" -- detect lists for formatting
-
--- visuals
 o.colorcolumn = "95"
-
 o.list = false -- don't show problematic characters.
-
--- add binaries installed by mason.nvim to path
--- local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
--- vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
-
--- o.pumblend = 10 -- Popup blend
--- o.isfname:append("@-@")
