@@ -69,13 +69,6 @@ return {
 		end,
 		keys = {
 			{
-				"<leader>gg",
-				function()
-					vim.cmd("!tmux new-window -c" .. vim.fn.getcwd() .. " -- lazygit")
-				end,
-				desc = "Lazygit",
-			},
-			{
 				"<leader>gk",
 				function()
 					require("gitsigns").nav_hunk("prev")

@@ -32,6 +32,7 @@
   "midnight.nvim": { "branch": "main", "commit": "fe062a6f2e5bd77cd8a260f61e6e12789eaf4f13" },
   "mini.nvim": { "branch": "main", "commit": "f90b6b820062fc06d6d51ed61a0f9b7f9a13b01b" },
   "moonfly": { "branch": "master", "commit": "71419566025c44fe3ae105e38757b22d1d7147eb" },
+  "namu.nvim": { "branch": "main", "commit": "0030f968cf3f5e19d8589c88b24ecac5fadb4ab1" },
   "neo-tree.nvim": { "branch": "main", "commit": "6a4f0a830f2322f187bce6f18a9e6b5b7ba188e3" },
   "neorg": { "branch": "main", "commit": "ed43ed58116caa0a17bbbc7aa663e32bf94bc531" },
   "neotest": { "branch": "master", "commit": "d66cf4e05a116957f0d3a7755a24291c7d1e1f72" },
